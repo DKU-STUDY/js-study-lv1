@@ -79,8 +79,8 @@ $ git push https://github.com/DKU-STUDY/js-study-lv1 main
 
 ## 스터디 과정 
 
-- [1주차: [워밍업] Todo List 만들기](./step1/README.md)
-- [2주차: Webpack + TodoList 리팩토링](./step2/README.md)
-- [3주차: ExpressJS로 API 서버 만들기](./step3/README.md)
-- [4주차: API 연동](./step4/README.md)
-- [5주차: 배포하기](./step5/README.md)
+- [1주차: [워밍업] Todo List 만들기](./step1)
+- [2주차: Webpack + TodoList 리팩토링](./step2)
+- [3주차: ExpressJS로 API 서버 만들기](./step3)
+- [4주차: API 연동](./step4)
+- [5주차: 배포하기](./step5)
