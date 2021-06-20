@@ -2,35 +2,64 @@
 
 ## 들어가기 전에
 
+### git
+
+> git 명령어에 대해 이해해야 합니다.
+
+- [git download](https://git-scm.com/)
+- [git 간편 안내서](https://rogerdudler.github.io/git-guide/index.ko.html)
+  
+### git 명령어 요약
+
+`git` 설치가 완료되었다면
+
+- `mac`의 경우 terminal을 열어서 `git`을 입력하여 설치 되었음을 확인 
+- `window`의 경우 폴더 혹은 바탕화면에서 마우스 우클릭으로 `git bash` 존재 여부 확인
+
+```bash
+
+########## 설치한 직후에 email, name 설정 ##########
+$ git config --global user.name "junilhwang"          # 본인의 github id 입력
+$ git config --global user.email "junil.h@kakao.com"  # 본인의 github email 입력
+#################################################
+
+# 프로젝트 코드 가져오기
+$ git clone https://github.com/DKU-STUDY/js-study-lv1
+
+# 프로젝트 폴더로 이동하기
+$ cd js-study-lv
+
+# 원격 저장소 존재 여부 확인
+$ git remote  
+> origin # origin은 `https://github.com/DKU-STUDY/js-study-lv1`의 별칭으로 등록된 원격 저장소
+
+# 테스트 파일 추가 
+$ echo "테스트 파일 추가" > test.txt
+
+# git 파일 추가 
+$ git add test.txt
+
+# 파일에 대한 커밋 로그 작성
+$ git commit -m "테스트 파일 추가"
+
+# 커밋 로그를 원격 저장소에 업로드
+$ git push origin main
+
+# 위의 명령어는 다음 명령어와 똑같음
+$ git push https://github.com/DKU-STUDY/js-study-lv1 main
+```
+
+* 잘 이해가 되지 않을 경우 디스코드 채널에 질문 남겨주세요!
+
+### Github
+
 - Github Pull Request에 대해 이해해야 합니다.
 - 이 [동영상](https://youtu.be/pR5SNFyzdg8)을 보면서 튜토리얼을 진행해주세요.
 
-## 1주차: [워밍업] Todo List 만들기
+## 스터디 과정 
 
-### 📣 요구사항
-
-- [ ] 아이템 추가
-  - [ ] 아이템 추가 `input`에 텍스트를 입력 후 `Enter`를 누르거나 `생성 버튼`을 클릭하여 아이템을 추가할 수 있다.
-  - [ ] 입력한 내용이 없을 때 아이템 추가를 시도할 경우 `아이템 이름을 입력해주세요` 라고 경고창을 띄워야 한다.
-- [ ] 아이템이 추가 성공 시 TodoList에 반영된다.
-- [ ] 아이템 수정
-  - [ ] 아이템 내용 옆에 `수정` 버튼이 존재한다.
-  - [ ] `수정` 버튼을 클릭할 경우 아이템의 내용이 포함된 `input`으로 `DOM`이 변경된다.
-  - [ ] 수정 `input`에 내용을 입력 후 `Enter`를 누르거나 `수정 버튼`을 클릭하면 아이템의 내용이 수정된다.
-- [ ] 아이템 삭제
-  - [ ] 아이템 내용 옆에 `삭제` 버튼이 존재한다.
-  - [ ] `삭제` 버튼을 클릭할 경우 아이템이 삭제된다.
-- [ ] Todo 아이템 Toggle
-  - [ ] 아이테 내용 왼쪽에 체크박스가 존재한다.
-  - [ ] 체크박스를 클릭할 경우 아이템의 색상이 파란색으로 변경된다.
-
-### 👀 구현에 필요한 내용
-
-
-## 2주차: Webpack + TodoList 리팩토링
-
-## 3주차: ExpressJS로 API 서버 만들기
-
-## 4주차: API 연동
-
-## 5주차: 배포하기
+- [1주차: [워밍업] Todo List 만들기](./step1/README.md)
+- [2주차: Webpack + TodoList 리팩토링](./step2/README.md)
+- [3주차: ExpressJS로 API 서버 만들기](./step3/README.md)
+- [4주차: API 연동](./step4/README.md)
+- [5주차: 배포하기](./step5/README.md)
