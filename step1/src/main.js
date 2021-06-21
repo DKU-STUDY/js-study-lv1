@@ -1,7 +1,7 @@
 const state = {
   todoItems: [
     { id: 1, content: '첫 번째 아이템', isComplete: false, createdAt: Date.now() },
-    { id: 2, content: '포동이', isComplete: true, createdAt: Date.now() },
+    { id: 2, content: '포동이', isComplete: false, createdAt: Date.now() },
     { id: 3, content: '코코', isComplete: false, createdAt: Date.now() },
   ],
   selectedItem: -1,
@@ -45,7 +45,15 @@ function template () {
           }
           return `
             <li>
-              <p>${item.content}</p>
+              <p ${item.isComplete ? ' style="color: #09F"' : ''}>
+                <input
+                  type="checkbox"
+                  class="complete"
+                  data-key="${key}"
+                  ${item.isComplete ? ' checked' : ''}
+                />
+                ${item.content}
+              </p>
               <button type="button">취소</button>
               
               <button
@@ -85,6 +93,7 @@ function render () {
   const $modifiers = $app.querySelectorAll('.modifier');
   const $deleter = $app.querySelectorAll('.deleter');
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
+  const $complete = $app.querySelectorAll('.complete');
 
   /** 이벤트 등록 **/
 
@@ -138,6 +147,17 @@ function render () {
   }
   $deleter.forEach(function ($el) {
     $el.addEventListener('click', deleteItem)
+  })
+
+  // 아이템 토글 관리
+  const toggleItem = function (event) {
+    const key = Number(event.target.dataset.key);
+    const item = state.todoItems[key];
+    item.isComplete = !item.isComplete;
+    render();
+  }
+  $complete.forEach(function ($el) {
+    $el.addEventListener('click', toggleItem)
   })
 
   /** 이벤트 등록 **/
