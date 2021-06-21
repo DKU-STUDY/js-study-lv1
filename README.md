@@ -2,6 +2,8 @@
 
 ## 들어가기 전에
 
+pr 테스트
+
 ### Editor 혹은 IDE
 
 - [VSCode](https://code.visualstudio.com/)
