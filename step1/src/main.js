@@ -58,8 +58,33 @@ function template () {
 /**
  * 앱 시작시 실행될 entry 함수
  */
+function render () {
+  // 렌더링 됨
+  const $app = document.querySelector('#app');
+  $app.innerHTML = template();
+
+  // 이벤트 등록
+  const $form = $app.querySelector('form[name="appenderForm"]');
+  const itemAdd = function (event) {
+    event.preventDefault();
+    const content = $form.querySelector('input').value.trim();
+    if (content.length === 0) {
+      return alert('아이템 내용을 입력해주세요');
+    }
+
+    state.todoItems.push({
+      id: 4,
+      createdAt: Date.now(),
+      content: content,
+      isComplete: false,
+    });
+    render();
+  }
+  $form.addEventListener('submit', itemAdd);
+}
+
 function main () {
-  document.querySelector('#app').innerHTML = template();
+  render();
 }
 
 // 앱 실행
