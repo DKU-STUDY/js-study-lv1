@@ -23,7 +23,6 @@ function template () {
       </form>
       <ul>
         
-        <!-- 완료된 아이템 -->
         ${state.todoItems.map(function (item, key) {
           if (key === state.selectedItem) {
             return `
@@ -40,9 +39,9 @@ function template () {
                   </fieldset>
                 </form>
               </li>
-              <!-- / 수정 중인 아이템 -->
             `
           }
+    
           return `
             <li>
               <p ${item.isComplete ? ' style="color: #09F"' : ''}>
@@ -74,7 +73,7 @@ function template () {
             </li>
           `
         }).join('')}
-        <!-- / 완료된 아이템 -->
+        
       </ul>
     </main>
   `
@@ -84,6 +83,7 @@ function template () {
  * 앱 시작시 실행될 entry 함수
  */
 function render () {
+  
   // 렌더링 됨
   const $app = document.querySelector('#app');
   $app.innerHTML = template();
@@ -95,6 +95,9 @@ function render () {
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
   const $complete = $app.querySelectorAll('.complete');
 
+  
+  
+  
   /** 이벤트 등록 **/
 
   // 아이템 추가 관리
