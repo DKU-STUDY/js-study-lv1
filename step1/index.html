@@ -21,6 +21,7 @@
     #app > ul li { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #ddd; }
     #app > ul li button { margin-left: 5px; }
   </style>
+  <script type="module" src="./src/main.js" defer></script>
 </head>
 <body>
   <main id="app">
@@ -35,7 +36,7 @@
         <button type="submit">전송</button>
       </fieldset>
     </form>
-    <ul>
+    <ul class="todo-list">
       <!-- 완료된 아이템 -->
       <li>
         <p style="color: #09F">
@@ -91,6 +92,6 @@
       <!-- / 아이템의 기본 상태들 -->
     </ul>
   </main>
-  <script type="module" src="./src/main.js" defer></script>
+  
 </body>
 </html>
