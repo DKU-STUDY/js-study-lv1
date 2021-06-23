@@ -72,8 +72,7 @@ const addTodo = (event) => {
 
 const render = () => {
   $todoList.innerHTML = todoTemplate();
-
-  // console.log($appenderForm);
+  
   $appenderForm.addEventListener('submit', addTodo);
 
 }
