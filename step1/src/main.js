@@ -28,18 +28,12 @@ function template() {
       </fieldset>
     </form>
     <ul>
-      <!-- 완료된 아이템 -->
+
       ${state.items.map(function(item,key) {
         
         if(key === state.idx) {
           return `
             <li>
-              <p ${item.isComplete ? ' style="color:#09F"':''}>
-                <input type="checkbox" 
-                class="complete" data-key="${key}" 
-                ${item.isComplete ? 'checked' : ''}/>
-                ${item.content}
-              </p>
               <form name="modifierForm" action="">
                 <fieldset>
                   <legend hidden>아이템 수정</legend>
@@ -57,7 +51,10 @@ function template() {
         
         return `
         <li>
-          <p style="color: #09F">
+          <p ${item.isComplete ? ' style="color:#09F"':''}>
+            <input type="checkbox" 
+            class="complete" data-key="${key}" 
+            ${item.isComplete ? 'checked' : ''}/>
             ${item.content}
           </p>
           <button type="button">취소</button>
@@ -81,8 +78,8 @@ function render () {
   const $appenderForm = $app.querySelector('form[name="appenderForm"]');
   const $modifiers = $app.querySelectorAll('.modifier');  
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
-  const $deleters = $app.querySelector('.remover');
-  const $complete = $app.querySelector('.complete');
+  const $deleters = $app.querySelectorAll('.remover');
+  const $complete = $app.querySelectorAll('.complete');
 
   /*item 추가 이벤트 */
   const addItem = function (event) {
@@ -147,6 +144,7 @@ function render () {
     it.isComplete = !it.isComplete;
     render();
   }
+  
   $complete.forEach(function($element) {
     $element.addEventListener('click',toggleItem)
   })
