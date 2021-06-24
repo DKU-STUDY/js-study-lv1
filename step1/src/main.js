@@ -42,7 +42,7 @@ function template() {
                     <input type="text" value="${item.content}" size="40">
                   </label>
                   <button type="submit">완료</button>
-                  <button type="button">취소</button>
+                  <button type="button" class="cancle">취소</button>
                 </fieldset>
               </form>
             </li>
@@ -80,6 +80,7 @@ function render () {
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
   const $deleters = $app.querySelectorAll('.remover');
   const $complete = $app.querySelectorAll('.complete');
+  const $canclers = $app.querySelectorAll('.cancle');
 
   /*item 추가 이벤트 */
   const addItem = function (event) {
@@ -97,6 +98,7 @@ function render () {
     })
     render();
   }
+
   $appenderForm.addEventListener('submit',addItem);
 
   /*item 수정버튼 눌렀을 때 이벤트 */
@@ -127,6 +129,16 @@ function render () {
   if($modifierForm) {
     $modifierForm.addEventListener('submit',updateItem);
   }
+
+  const cancleUpdate = function(event) {
+    event.preventDefault();
+    state.idx = -1;
+    render();
+  }
+
+  $canclers.forEach(function($element) {
+    $element.addEventListener('click',cancleUpdate);
+  })
 
   /*삭제 관리 */
   const deleteItem = function(event) {
