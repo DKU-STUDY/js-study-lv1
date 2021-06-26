@@ -4,14 +4,11 @@
   author : 김찬휘 
  */
 const state = {
-
-  items : [
-  {id:1,content:'first item',isComplete:false,createtime:Date.now() },
-  {id:2,content:'second item',isComplete:false,createtime:Date.now() },
-  {id:3,content:'third item',isComplete:false,createtime:Date.now() },
-  ],
+  items : [],
   idx : -1,
 }
+
+const updateClicekd =``
 
 function template() {
   return `
@@ -69,6 +66,12 @@ function template() {
   `
 } 
 
+function checkLength(content) {
+  if(content.length === 0) {
+    return alert("enter content");
+  }
+}
+
 function render () {
   // app 변수에 template을 넣음(렌더링)
   const $app = document.querySelector('#app');
@@ -86,16 +89,16 @@ function render () {
   const addItem = function (event) {
     event.preventDefault();
     const content = $appenderForm.querySelector('input').value.trim(); //앞 뒤 빈칸 제거
-    if(content.length === 0) {
-      return alert("enter content");
-    }
+    
+    checkLength(content);
 
     state.items.push({
-      id: 4,
+      id: state.items.length,
       content: $appenderForm.querySelector('input').value,
       isComplete: false,
       createtime: Date.now(),
     })
+
     render();
   }
 
@@ -116,9 +119,7 @@ function render () {
     event.preventDefault();
     const content = event.target.querySelector('input').value.trim();
 
-    if(content.length === 0) {
-      return alert("enter content");
-    }
+    checkLength(content);
 
     state.items[state.idx].content = content;
     state.idx = -1;
@@ -130,6 +131,7 @@ function render () {
     $modifierForm.addEventListener('submit',updateItem);
   }
 
+  /*수정 취소 구현 */
   const cancleUpdate = function(event) {
     event.preventDefault();
     state.idx = -1;
@@ -139,6 +141,16 @@ function render () {
   $canclers.forEach(function($element) {
     $element.addEventListener('click',cancleUpdate);
   })
+
+  if($modifierForm) {
+    $modifierForm.addEventListener('keyup',function(event){
+      if(event.key == "Escape") {
+        state.idx = -1;
+        render();
+      }
+    });
+  }
+
 
   /*삭제 관리 */
   const deleteItem = function(event) {
