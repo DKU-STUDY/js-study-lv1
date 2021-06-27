@@ -63,11 +63,11 @@ const render = () => {
   const $addItemForm = document.querySelector(`form[name="addItem"]`);
   const $processItemForm = document.querySelectorAll(`form[name="processItem"]`);
   const $updateItemForm = document.querySelectorAll(`form[name="updateItem"]`);
-  const $doneItem = document.querySelectorAll(`.done`);
-  const $editItem = document.querySelectorAll(`.edit`);
-  const $cancelItem = document.querySelectorAll(`.cancel`);
-  const $editInput = document.querySelectorAll(`.editInput`);
-  const $checkbox = document.querySelectorAll(`.checkbox`);
+  const $doneItem = document.querySelectorAll('.done');
+  const $editItem = document.querySelectorAll('.edit');
+  const $cancelItem = document.querySelectorAll('.cancel');
+  const $editInput = document.querySelectorAll('.editInput');
+  const $checkbox = document.querySelectorAll('.checkbox');
 
   const addItem = (event) => {
     event.preventDefault();
