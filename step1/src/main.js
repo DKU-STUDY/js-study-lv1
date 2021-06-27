@@ -67,7 +67,8 @@ function render() {
   const $modifiers = $app.querySelectorAll('.modifier');
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
   const $cancelers = $app.querySelectorAll('.canceler');
- 
+  const $deleters = $app.querySelectorAll('.deleter');
+  
   // 아이템 추가
   const addItem = function (event) {
     event.preventDefault();
@@ -120,6 +121,16 @@ function render() {
       render();
     }
   });
+  
+  // 아이템 삭제
+  const deleteItem = function (event) {
+    const key = Number(event.target.dataset.key);
+    state.todoItems.splice(key, 1);
+    render();
+  }
+  $deleters.forEach(function ($deleter) {
+    $deleter.addEventListener('click', deleteItem)
+  })
 
 
 }
