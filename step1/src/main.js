@@ -44,7 +44,8 @@ function template() {
       }
         return /* default */` 
             <li>
-              <p>${item.content}</p>
+              <input type="checkbox" class="complete" ${item.isComplete ? 'checked' : ''} data-key = "${key}" style="margin: 5px"/>
+              <p ${item.isComplete ? 'style="color: #09F"': ''}>${item.content}</p>
               <button type="button">취소</button>
               <button class='modifier' data-key="${key}" type="button">수정</button>
               <button class='deleter' type="button">삭제</button>
@@ -68,7 +69,9 @@ function render() {
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
   const $cancelers = $app.querySelectorAll('.canceler');
   const $deleters = $app.querySelectorAll('.deleter');
-  
+  const $completers = $app.querySelectorAll('.complete');
+
+
   // 아이템 추가
   const addItem = function (event) {
     event.preventDefault();
@@ -132,6 +135,16 @@ function render() {
     $deleter.addEventListener('click', deleteItem)
   })
 
+  // 아이템 토글
+  const toggleItem = function (event) {
+    const key = Number(event.target.dataset.key);
+    const item = state.todoItems[key];
+    item.isComplete = !item.isComplete;
+    render();
+  }
+  $completers.forEach(function ($completer) {
+    $completer.addEventListener('click', toggleItem);
+  })
 
 }
 
