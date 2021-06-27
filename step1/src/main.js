@@ -95,7 +95,6 @@ const render = () => {
     todoList.todoItems.push(newItem);
     render();
   };
-  $addItemForm.addEventListener('submit', addItem);
 
   const doneItem = (event) => {
     const targetId = +event.target.dataset.id;
@@ -103,7 +102,6 @@ const render = () => {
     todoList.todoItems.filter((item) => item.id === targetId)[0].checked = true;
     render();
   };
-  $doneItem.forEach((item) => item.addEventListener('click', doneItem));
 
   const editItem = (event) => {
     const targetId = +event.target.dataset.id;
@@ -111,7 +109,6 @@ const render = () => {
     todoList.todoItems.filter((item) => item.id === targetId)[0].status = todoList.status.edit;
     render();
   };
-  $editItem.forEach((item) => item.addEventListener('click', editItem));
 
   const updateItem = (event, target) => {
     event.preventDefault();
@@ -126,7 +123,6 @@ const render = () => {
     todoList.todoItems.filter((item) => item.id === targetId)[0].content = content;
     render();
   };
-  $updateItemForm.forEach((item) => item.addEventListener('submit', updateItem));
 
   const cancelItem = (event, target) => {
     const targetId = target !== undefined ? target : +event?.target?.dataset?.id;
@@ -135,7 +131,6 @@ const render = () => {
     todoList.todoItems.filter((item) => item.id === targetId)[0].checked = false;
     render();
   };
-  $cancelItem.forEach((item) => item.addEventListener('click', cancelItem));
 
   const deleteItem = (event) => {
     event.preventDefault();
@@ -144,7 +139,6 @@ const render = () => {
     todoList.todoItems = todoList.todoItems.filter((item) => item.id !== targetId);
     render();
   };
-  $processItemForm.forEach((item) => item.addEventListener('submit', deleteItem));
 
   const handleCheckBox = (event) => {
     const targetId = +event.target.dataset.id;
@@ -153,7 +147,6 @@ const render = () => {
     todoList.todoItems.filter((item) => item.id === targetId)[0].checked = !checkedStatus;
     render();
   };
-  $checkbox.forEach((item) => item.addEventListener('click', handleCheckBox));
 
   const editInputKeyEvent = (event) => {
     if (event.key === 'Escape') {
@@ -165,6 +158,14 @@ const render = () => {
       updateItem(event, targetId);
     }
   };
+
+  $addItemForm.addEventListener('submit', addItem);
+  $doneItem.forEach((item) => item.addEventListener('click', doneItem));
+  $editItem.forEach((item) => item.addEventListener('click', editItem));
+  $updateItemForm.forEach((item) => item.addEventListener('submit', updateItem));
+  $cancelItem.forEach((item) => item.addEventListener('click', cancelItem));
+  $processItemForm.forEach((item) => item.addEventListener('submit', deleteItem));
+  $checkbox.forEach((item) => item.addEventListener('click', handleCheckBox));
   $editInput.forEach((item) => item.addEventListener('keydown', editInputKeyEvent));
 };
 
