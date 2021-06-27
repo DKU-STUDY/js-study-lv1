@@ -42,6 +42,21 @@ function template() {
 function render() {
   const $app = document.querySelector('#app');
   $app.innerHTML = template();
+
+  // 태그 등록
+  const $appenderForm = $app.querySelector('form[name="appenderForm"]');
+  
+  // 아이템 추가
+  const addItem = function (event) {
+    event.preventDefault();
+    const content = $appenderForm.querySelector('input').value.trim();
+    if (content.length === 0) {
+      return alert('아이템 이름을 입력해주세요');
+    }
+    state.todoItems.push({id: 4, content: $appenderForm.querySelector('input').value, isComplete: false, createAt: Date.now(),})
+    render();
+  }
+  $appenderForm.addEventListener('submit', addItem);
 }
 
 function main () {
