@@ -30,7 +30,6 @@ const $app = document.querySelector('#app');
 const $todoList = document.querySelector('.todo-list');
 const $appenderForm = $app.querySelector('form[name="appenderForm"]');
 
-// const $modifierForm = ;
 
 const state = {
   todoItems: [
@@ -61,7 +60,8 @@ const todoTemplate = () => `${state.todoItems.map((todoItem, key) => {
   }
   return `
     <li>
-      <p>
+      <p ${todoItem.isComplete ? 'style="color:#09f;text-decoration-line:line-through"': ''}>
+        <input class="complete" type="checkbox" ${todoItem.isComplete ? 'checked' : ''} data-key="${key}"/>
         ${todoItem.content}
       </p>
       <button type="button">완료</button>
@@ -76,13 +76,18 @@ const addTodo = (event) => { //event 생략 가능
   event.preventDefault();
   const content = $appenderForm.querySelector('input').value.trim();
   if(content.length === 0) return alert('Todo Item 내용을 입력해주세요');
-
-  state.todoItems.push({
+  const newItem = {
     id: 4,
     createdAt: Date.now(),
     content: content,
     isComplete: false,
-  });
+  }
+  // state.todoItems.push({
+  //   id: 4,
+  //   createdAt: Date.now(),
+  //   content: content,
+  //   isComplete: false,
+  // });
   render();
   event.target.querySelector('input').value = ''; // input text 입력창 초기화
   event.target.querySelector('input').focus();
@@ -114,8 +119,15 @@ const cancelEdit = () => {
 // 아이템 삭제
 const deleteTodo = () => {
   const key = Number(event.target.dataset.key);
-  // console.log(key);
   state.todoItems.splice(key, 1);
+  render();
+};
+
+// 아이템 토글
+const toggleTodo = () => {
+  const key = Number(event.target.dataset.key);
+  const item = state.todoItems[key];
+  item.isComplete = !item.isComplete;
   render();
 };
 
@@ -155,6 +167,11 @@ const render = () => {
     $el.addEventListener('click', deleteTodo);
   });
 
+  // 아이템 토글
+  const $complete = $app.querySelectorAll('.complete');
+  $complete.forEach(($el) => {
+    $el.addEventListener('click', toggleTodo);
+  });
 
 
 }
