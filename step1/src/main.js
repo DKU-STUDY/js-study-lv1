@@ -27,13 +27,9 @@ const htmlTemplate = () => `
             return `<li>
               <form name="processItem" method="post" data-id="${item.id}">
                 <fieldset>
-                  <input class="checkbox" type="checkbox" name="check" data-id="${item.id}" ${
-              item.checked ? 'checked' : null
-            }/>
+                  <input class="checkbox" type="checkbox" name="check" data-id="${item.id}" ${item.checked ? 'checked' : null}/>
                   <span ${item.checked ? `style='color: #09F'` : ''}>${item.content}</span>
-                  <button class="${item.checked ? 'cancel' : 'done'}" type="button" data-id="${item.id}">${
-              item.checked ? '취소' : '완료'
-            }</button>
+                  <button class="${item.checked ? 'cancel' : 'done'}" type="button" data-id="${item.id}">${item.checked ? '취소' : '완료'}</button>
                   <button class="edit" type="button" data-id="${item.id}">수정</button>
                   <button class="delete" type="submit" data-id="${item.id}">삭제</button>
                 </fieldset>
@@ -45,9 +41,7 @@ const htmlTemplate = () => `
             return `<li>
               <form name="updateItem" method="post" data-id="${item.id}">
                 <fieldset>
-                  <input class="checkbox" type="checkbox" name="check" data-id="${item.id}" ${
-              item.checked ? 'checked' : null
-            }/>
+                  <input class="checkbox" type="checkbox" name="check" data-id="${item.id}" ${item.checked ? 'checked' : null}/>
                   <label>
                     <input class="editInput" type="text" value="${item.content}" data-id="${item.id}"/>
                   </label>
