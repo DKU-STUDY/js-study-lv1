@@ -22,18 +22,37 @@ function template() {
       </fieldset>
     </form>
     <ul>
-      ${state.todoItems.map(function(item,key) {
-          return ` 
-              <li>
-                <p>${item.content}</p>
+    ${state.todoItems.map(function(item,key) {
+      console.log(key);
+      console.log('selectedItem'+ state.selectedItem);
+      if (key === state.selectedItem) { // 수정 버튼 누르면
+        return `
+          <li>
+            <form name="modifierForm" action="">
+              <fieldset>
+                <legend hidden>아이템 수정</legend>
+                <label>
+                  <span hidden>아이템 수정</span>
+                  <input type="text" value="${item.content}" size="40">
+                </label>
+                <button type="submit">완료</button>
                 <button type="button">취소</button>
-                <button type="button">수정</button>
-                <button type="button">삭제</button>
-              </li>
-              `
-      }).join('')
-    
-    }
+              </fieldset>
+            </form>
+          </li>
+        `
+      }
+        return /* default */` 
+            <li>
+              <p>${item.content}</p>
+              <button type="button">취소</button>
+              <button class='modifier' data-key="${key}" type="button">수정</button>
+              <button class='deleter' type="button">삭제</button>
+            </li>
+            `
+    }).join('')
+  
+  }
     </ul>
   </main>
   `
@@ -45,6 +64,8 @@ function render() {
 
   // 태그 등록
   const $appenderForm = $app.querySelector('form[name="appenderForm"]');
+  const $modifiers = $app.querySelectorAll('.modifier');
+  const $modifierForm = $app.querySelector('form[name="modifierForm"]');
   
   // 아이템 추가
   const addItem = function (event) {
@@ -57,6 +78,33 @@ function render() {
     render();
   }
   $appenderForm.addEventListener('submit', addItem);
+  
+  // 수정 버튼 클릭 => input으로 DOM 변경
+  const editItem = function (event) {
+    state.selectedItem = Number(event.target.dataset.key);
+    render();
+  }
+  $modifiers.forEach(function ($modifier) {
+    $modifier.addEventListener('click', editItem);
+  })
+
+  // 아이템 수정 (update)
+  const updateItem = function (event) {
+    event.preventDefault();
+    const content = event.target.querySelector('input').value.trim();
+    if (content.length === 0) {
+      return alert('아이템 이름을 입력해주세요');
+    }
+    state.todoItems[state.selectedItem].content = content;
+    state.selectedItem = -1;
+    render();
+  }
+  if ($modifierForm) {
+    $modifierForm.addEventListener('submit', updateItem);
+  }
+
+
+
 }
 
 function main () {
