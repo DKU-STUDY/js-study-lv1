@@ -36,7 +36,7 @@ function template() {
                   <input type="text" value="${item.content}" size="40">
                 </label>
                 <button type="submit">완료</button>
-                <button type="button">취소</button>
+                <button class="canceler" type="button">취소</button>
               </fieldset>
             </form>
           </li>
@@ -66,7 +66,8 @@ function render() {
   const $appenderForm = $app.querySelector('form[name="appenderForm"]');
   const $modifiers = $app.querySelectorAll('.modifier');
   const $modifierForm = $app.querySelector('form[name="modifierForm"]');
-  
+  const $cancelers = $app.querySelectorAll('.canceler');
+ 
   // 아이템 추가
   const addItem = function (event) {
     event.preventDefault();
@@ -103,6 +104,22 @@ function render() {
     $modifierForm.addEventListener('submit', updateItem);
   }
 
+  // 아이템 수정 취소 (취소 버튼)
+  const cancelItem = function (event) {
+    state.selectedItem = -1;
+    render();
+  }
+  $cancelers.forEach(function ($canceler) {
+    $canceler.addEventListener('click', cancelItem);
+  })
+
+  // 아이템 수정 취소 (esc key)
+  window.addEventListener('keydown', function(event){
+    if(event.key === "Escape") {
+      state.selectedItem = -1;
+      render();
+    }
+  });
 
 
 }
