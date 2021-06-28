@@ -35,6 +35,7 @@
     - [ ] ESM
   - [ ] 브라우저 모듈에 대해 알아보기
   - [ ] 번들러 적용
+    - [ ] 번들러 설치를 위해 nodejs + npm 설치
     - [ ] Parcel, Webpack, Rollup, Vite 중 택 1
 
 ## 파일 분리 예시
