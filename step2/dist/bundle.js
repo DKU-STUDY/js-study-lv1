@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log(Array(5).fill("\n    템플릿 리터럴을 사용해봅시다.\n    안녕하세요\n  ").join("\n")),console.log("test")})();
