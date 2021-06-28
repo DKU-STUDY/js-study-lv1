@@ -23,6 +23,15 @@ function template() {
      </fieldset>
    </form>
    <ul>
+   ${state.todoItems.map(function (item) {
+    return `
+    <li>
+      <p style="color: #09F">${item.content}</p>
+      <button type="button">취소</button>
+      <button type="button">수정</button>
+      <button type="button">삭제</button>
+    </li>`;
+  }).join('')}
      <!-- 완료된 아이템 -->
      <li>
        <p style="color: #09F">
@@ -94,7 +103,10 @@ function handleSubmitAppenderForm(event) {
  * 앱 시작시 실행될 entry 함수
  */
 function main() {
-  document.querySelector("#app").innerHTML = template();
+  const $app = document.querySelector("#app")
+  $app.innerHTML = template();
+  const $form = $app.querySelector('form[name="appenderForm"]');
+
   // 추가 폼 전송 이벤트 등록
   document.forms.appenderForm.addEventListener('submit', handleSubmitAppenderForm);
 }
