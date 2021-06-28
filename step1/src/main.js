@@ -6,71 +6,67 @@ const todoItems = {
   seletedItem: -1,        // 특정 아이템 체크 여부를 확인하기 위한 변수
 };
 
+const itemTemplate = ({id, content, highlight, isComplete}) => `
+        <li>
+            ${todoItems.seletedItem == id ? `
+                <form name="modifierForm" action="" id="${id}">
+                    <fieldset>
+                        <legend hidden>아이템 수정</legend>
+                        <label>
+                            <span hidden>아이템 수정</span>
+                            <input type="text" value="${content}" size="40">
+                        </label>
+                            <button type="submit">완료</button>
+                            <button type="button" class="cancel">취소</button>
+                    </fieldset>
+                </form>   
+        `   :   `
+                <p ${highlight ? 'style="color:#09F"' : ''} ${isComplete ? 'class="finish"' : ''}>
+                    <input type="checkbox" id="${id}" ${highlight ? ' checked' : ''}>
+                    ${content}
+                </p>
+                <button type="button" class="complete" id="${id}">완료</button>
+                <button type="button" class="modify" id="${id}">수정</button>
+                <button type="button" class="delete" id="${id}">삭제</button>
+            `}
+        </li>
+    `
+
 /**
  * 템플릿을 제공하는 함수 
  */
-const template = function() {
-  return `
-  <h1>📃 TodoList</h1>
-    <form name="appenderForm" action="" method="post">
-      <fieldset>
-        <legend hidden>TodoList Form</legend>
-        <label>
-          <span hidden>아이템 추가</span>
-          <input type="text" size="40" placeholder="Todo Item 내용을 입력해주세요">
-        </label>
-        <button type="submit">전송</button>
-      </fieldset>
-    </form>
+const template = () =>  `
+    <h1>📃 TodoList</h1>
+        <form name="appenderForm" action="" method="post">
+          <fieldset>
+            <legend hidden>TodoList Form</legend>
+            <label>
+              <span hidden>아이템 추가</span>
+              <input type="text" size="40" placeholder="Todo Item 내용을 입력해주세요">
+            </label>
+            <button type="submit">전송</button>
+          </fieldset>
+        </form>
     <ul>
-      ${todoItems.items.map(function(item) {
-        if(todoItems.seletedItem == item.id) {
-          return `
-            <li>
-              <form name="modifierForm" action="" id="${item.id}">
-                <fieldset>
-                  <legend hidden>아이템 수정</legend>
-                  <label>
-                    <span hidden>아이템 수정</span>
-                    <input type="text" value="${item.content}" size="40">
-                  </label>
-                  <button type="submit">완료</button>
-                  <button type="button" class="cancel">취소</button>
-                </fieldset>
-              </form>
-            </li>
-          `
-      }
-      return `
-        <li>
-          <p ${item.highlight ? 'style="color:#09F"' : ''} ${item.isComplete ? 'class="finish"' : ''}>
-            <input type="checkbox" id="${item.id}" ${item.highlight ? ' checked' : ''}>
-            ${item.content}
-          </p>
-          <button type="button" class="complete" id="${item.id}">완료</button>
-          <button type="button" class="modify" id="${item.id}">수정</button>
-          <button type="button" class="delete" id="${item.id}">삭제</button>
-        </li>
-      `
-    }).join('')}
+        ${todoItems.items.map(itemTemplate).join('')}
     </ul>
   `
-};
 
 /**
  * 랜더링 함수
  */
 const render = function() {
-  const $app = document.querySelector('#app');
-  $app.innerHTML = template();
+    const $app = document.querySelector('#app');
+    $app.innerHTML = template();
+    setBtnHandler();
 };
 
 /**
  * 아이템 추가 함수
  */
  const addItem = function(event) {
-  event.preventDefault();                                                     // 새로고침되는 default 동작 방지
-  
+  event.preventDefault();
+
   const $inputInfo = this.querySelector('input');
   const value = $inputInfo.value.trim();
   
@@ -87,8 +83,7 @@ const render = function() {
     createdAt: Date.now()
   });                                                  
 
-  render();                                                                   // 랜더링을 통해 반영
-  setBtnHandler();                                                            // 템플릿의 모든 버튼에 대한 handler 등록
+  render();                                                                       // 템플릿의 모든 버튼에 대한 handler 등록
 };
 
 /**
@@ -102,7 +97,6 @@ const deleteItem = function(event) {
   });
 
   render();
-  setBtnHandler();
 };
 
 /**
@@ -113,7 +107,6 @@ const deleteItem = function(event) {
 
   todoItems.seletedItem = modBtn.id;                                          // 수정 버튼을 누른 아이템을 selectedItem을 통해 체크
   render();
-  setBtnHandler();
 
   const $modifierForm = document.querySelector('form[name="modifierForm"]');  // 수정 form 조회
   $modifierForm.addEventListener('submit', updateItem.bind($modifierForm));
@@ -148,7 +141,6 @@ const deleteItem = function(event) {
   todoItems.seletedItem = -1;                                                 // 수정이 완료되었기 때문에 수정 form 출력 x
 
   render();
-  setBtnHandler();
 }
 
 /**
@@ -158,7 +150,6 @@ const cancelModifyItem = function(event) {
   todoItems.seletedItem = -1;                                                 // 취소 버튼 클릭 시 기존의 화면 유지
 
   render();
-  setBtnHandler();
 }
 
 /**
@@ -170,7 +161,6 @@ const completeItem = function(event) {
   todoItems.items[idx].isComplete = !todoItems.items[idx].isComplete;         // 해당 객체의 완료 여부 변경
   
   render();
-  setBtnHandler();
 }
 
 /**
@@ -182,7 +172,6 @@ const checkItem = function(event) {
   todoItems.items[idx].highlight = !todoItems.items[idx].highlight;           // 해당 객체의 하이라이트 여부 변경
 
   render();
-  setBtnHandler();
 }
 
 /**
@@ -216,8 +205,6 @@ function setBtnHandler() {
 
 function main() {
   render();
-  const $appenderForm = document.querySelector('form[name="appenderForm"]');
-  $appenderForm.addEventListener('submit', addItem.bind($appenderForm));      // addItem 함수의 this를 $appenderForm으로 바인딩하여 사용
 }
 
 // 앱 실행
