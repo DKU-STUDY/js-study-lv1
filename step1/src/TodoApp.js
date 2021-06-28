@@ -28,20 +28,15 @@ class TodoApp extends Component{
         new TodoList($todolist, {
             todoList: this.$state,
             editTodo: this.editTodo.bind(this),
-            onEditMode: this.onEditMode.bind(this)
+            onEditMode: this.onEditMode.bind(this),
+            deleteTodo: this.deleteTodo.bind(this),
+            toggleTodo: this.toggleTodo.bind(this)
 
         });
         new TodoAppender($todoAppender, {
             addTodo: this.addTodo.bind(this)
         });
     }
-
-    // get todoState(){
-    //     // const { todoItems } = this.$state;
-    //     // return todoItems;
-
-    //     return this.$state;
-    // }
 
     addTodo(){
         event.preventDefault();
@@ -54,7 +49,7 @@ class TodoApp extends Component{
             isComplete: false,
         }
         this.setState({ todoItems: [...this.$state.todoItems, newItem]});
-        event.target.querySelector('input').value = ''; // input text 입력창 초기화
+        event.target.querySelector('input').value = '';
         event.target.querySelector('input').focus();
     }
     
@@ -62,17 +57,30 @@ class TodoApp extends Component{
         event.preventDefault();
         const content = event.target.querySelector('input').value.trim();
         if(content.length === 0) return alert('Todo Item 내용을 입력해주세요');
-        this.$state.todoItems[this.$state.selectedItem].content = content;
-        this.$state.selectedItem = -1;
-        this.render();
-
+        const newState = this.$state;
+        newState.todoItems[newState.selectedItem].content = content;
+        newState.selectedItem = -1;
+        this.setState(newState);
     }
 
-
-    onEditMode(){
-        this.$state.selectedItem = Number(event.target.dataset.key);
+    onEditMode(keyNum){
+        this.$state.selectedItem = keyNum;
         this.render();
-        this.$target.querySelector('form[name="modifierForm"] input').focus();
+
+        const $modifierForm = this.$target.querySelector('form[name="modifierForm"] input');
+        if($modifierForm) $modifierForm.focus();
+    }
+
+    deleteTodo(keyNum){
+        const { todoItems } = this.$state
+        todoItems.splice(keyNum, 1);
+        this.setState({ todoItems });
+    }
+
+    toggleTodo(keyNum){
+        const { todoItems } = this.$state;
+        todoItems[keyNum].isComplete = !todoItems[keyNum].isComplete;
+        this.setState({ todoItems });
     }
 
 }

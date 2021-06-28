@@ -2,26 +2,14 @@ export default class Component{
     $target;
     $state;
     $props;
-    // constructor($target, $props = []){
-    //     this.$target = $target;
-    //     this.$props = $props;
-    //     // this.setup();
-    //     // this.render();
-    //     // this.setEvent();
-    //     // this.init();
-    // }
     constructor($target, $props = []){
         this.$target = $target;
         this.$props = $props;
         this.setup();
-        this.setEvent();
         this.render();
+        this.setEvent();
     }
-    // async init(){
-    //     await this.setup();
-    //     await this.render();
-    //     await this.setEvent();
-    // }
+    
     setup(){}
     mounted(){}
     template(){}
