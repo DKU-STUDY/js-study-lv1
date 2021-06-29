@@ -9,7 +9,7 @@
   - [ ] 파일을 기능 단위로 분리해본다.
     - [ ] core: 어플리케이션의 베이스 코드
     - [x] components: 컴포넌트 코드
-    - [ ] utils: 유틸리티 성향의 코드
+    - [x] utils: 유틸리티 성향의 코드
     - [x] constants: 상수
     - [x] app.js (entry point)
   - [x] 다음과 같은 규칙을 지켜가며 코딩한다.

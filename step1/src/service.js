@@ -1,4 +1,5 @@
 import { template } from './template.js';
+import { pushItem } from './utils.js';
 
 export const state = {
   todoItems: [
@@ -16,12 +17,8 @@ const addItem = (e) => {
     return alert('아이템 내용을 입력해주세요');
   }
 
-  state.todoItems.push({
-    id: 4,
-    createAt: Date.now(),
-    content: e.target.querySelector('input').value,
-    isComplete: false
-  });
+  pushItem(state, e);
+
   render();
 };
 
