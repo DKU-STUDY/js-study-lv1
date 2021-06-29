@@ -21,10 +21,11 @@
     #app > ul li { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #ddd; }
     #app > ul li button { margin-left: 5px; }
   </style>
+  <script type="module" src="./src/TodoApp.js" defer></script>
 </head>
 <body>
   <main id="app">
-    <h1>📃 TodoList</h1>
+    <!-- <h1>📃 TodoList</h1>
     <form name="appenderForm" action="" method="post">
       <fieldset>
         <legend hidden>TodoList Form</legend>
@@ -35,8 +36,7 @@
         <button type="submit">전송</button>
       </fieldset>
     </form>
-    <ul>
-      <!-- 완료된 아이템 -->
+    <ul class="todo-list">
       <li>
         <p style="color: #09F">
           1주차: Todo List 만들기
@@ -45,9 +45,6 @@
         <button type="button">수정</button>
         <button type="button">삭제</button>
       </li>
-      <!-- / 완료된 아이템 -->
-
-      <!-- 수정 중인 아이템 -->
       <li>
         <form name="modifierForm" action="">
           <fieldset>
@@ -61,9 +58,6 @@
           </fieldset>
         </form>
       </li>
-      <!-- / 수정 중인 아이템 -->
-
-      <!-- 아이템의 기본 상태들 -->
       <li>
         <p>
           3주차: ExpressJS로 API 서버 만들기
@@ -72,25 +66,8 @@
         <button type="button">수정</button>
         <button type="button">삭제</button>
       </li>
-      <li>
-        <p>
-          4주차: API 연동
-        </p>
-        <button type="button">완료</button>
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
-      </li>
-      <li>
-        <p>
-          5주차: 배포하기
-        </p>
-        <button type="button">완료</button>
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
-      </li>
-      <!-- / 아이템의 기본 상태들 -->
-    </ul>
+    </ul> -->
   </main>
-  <script type="module" src="./src/main.js" defer></script>
+  
 </body>
 </html>
