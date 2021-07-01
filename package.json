@@ -1,0 +1,29 @@
+{
+  "name": "js-study-lv1",
+  "version": "1.0.0",
+  "description": "- [VSCode](https://code.visualstudio.com/)\r   - 대부분의 프론트엔드 개발자가 사용하는 **무료** `에디터`\r   - 장점\r     - 강력한 플러그인 지원\r     - 직관적인 UI\r     - 빠름\r   - 단점\r     - 설치 직후 다운 받아야 하는 것들이 너무 많음\r     - 즉, 커스텀이 힘듦\r - [Intellij](https://www.jetbrains.com/ko-kr/idea/)\r   - 대부분의 개발자가 사용하는 **유료** `IDE`\r   - 장점\r     - 학생 이메일이 있을 경우 무료로 `Ultimate` 사용 가능\r     - 필요한 모든 기능이 탑재되어 있음\r   - 단점\r     - 기본적으로 기능이 너무 많아서 헷갈림\r     - 고사양 PC가 아닐 경우 버벅임",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baesumin/js-study-lv1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baesumin/js-study-lv1/issues"
+  },
+  "homepage": "https://github.com/baesumin/js-study-lv1#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
