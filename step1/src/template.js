@@ -1,7 +1,7 @@
 import { state } from './service.js';
 import { item } from './components/item.js';
 
-export function template() {
+export const template = () => {
   return /*html*/ `
     <main id="app">
       <h1>📃 TodoList</h1>
@@ -20,4 +20,4 @@ export function template() {
       </ul>
     </main>
     `;
-}
+};
