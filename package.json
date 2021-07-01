@@ -18,8 +18,8 @@
     "url": "https://github.com/baesumin/js-study-lv1/issues"
   },
   "homepage": "https://github.com/baesumin/js-study-lv1#readme",
-  "dependencies": {},
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "style-loader": "^3.0.0",
