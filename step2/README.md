@@ -3,9 +3,9 @@
 ## 📣 요구사항
 
 - [ ] 리팩토링
-  - [ ] ECMAScript에 대한 조사
-    - [ ] ECMAScript, Javascript 용어 정리
-    - [ ] ES5 vs ES6 차이점 정리
+  - [x] ECMAScript에 대한 조사
+    - [x] ECMAScript, Javascript 용어 정리
+    - [x] ES5 vs ES6 차이점 정리
   - [ ] 파일을 기능 단위로 분리해본다.
     - [ ] core: 어플리케이션의 베이스 코드
     - [x] components: 컴포넌트 코드
@@ -19,21 +19,21 @@
     - [x] 한 줄에 점을 하나만 찍는다.
     - [x] 줄여쓰지 않는다 (축약 금지)
 - [ ] 번들러 조사 및 적용
-  - [ ] 번들러에 대해 알아보기
-    - [ ] javascript 번들링
-    - [ ] 번들링을 하는 이유, 필요한 이유
-    - [ ] 번들러로 할 수 있는 일들
+  - [x] 번들러에 대해 알아보기
+    - [x] javascript 번들링
+    - [x] 번들링을 하는 이유, 필요한 이유
+    - [x] 번들러로 할 수 있는 일들
   - [ ] 번들러 종류 알아보기
-    - [ ] parcel
-    - [ ] webpack
+    - [x] parcel
+    - [x] webpack
     - [ ] rollup
     - [ ] vite
-  - [ ] 모듈 시스템에 대해 알아보기
-    - [ ] CommonJS
-    - [ ] AMD
-    - [ ] RequireJS
-    - [ ] ESM
-  - [ ] 브라우저 모듈에 대해 알아보기
+  - [x] 모듈 시스템에 대해 알아보기
+    - [x] CommonJS
+    - [x] AMD
+    - [x] RequireJS
+    - [x] ESM
+  - [x] 브라우저 모듈에 대해 알아보기
   - [x] 번들러 적용
     - [x] 번들러 설치를 위해 nodejs + npm 설치
     - [x] Parcel, Webpack, Rollup, Vite 중 택 1
