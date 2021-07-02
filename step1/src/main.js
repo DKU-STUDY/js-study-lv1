@@ -121,47 +121,38 @@ function render () {
   const $app = document.querySelector('#app');
   $app.innerHTML = template();
 
-  const $appenderForm = $app.querySelector('form[name="appenderForm"]');
-  const $modifiers = $app.querySelectorAll('.modifier');  
-  const $modifierForm = $app.querySelector('form[name="modifierForm"]');
-  const $deleters = $app.querySelectorAll('.remover');
-  const $complete = $app.querySelectorAll('.complete');
-  const $canclers = $app.querySelectorAll('.cancle');
+  $app.querySelector('form[name="appenderForm"]')
+      .addEventListener('submit',addItem);
+    
+  $app.querySelectorAll('.modifier')
+      .forEach(function($modifier) {
+        $modifier.addEventListener('click', editItem);
+      });
 
-  $appenderForm.addEventListener('submit',addItem);
+  $app.querySelector('form[name="modifierForm"]') ?.addEventListener('submit',updateItem);
 
-  $modifiers.forEach(function($modifier) {
-    $modifier.addEventListener('click', editItem);
-  })
+  $app.querySelector('form[name="modifierForm"]') ?.addEventListener('keyup',function(event){
+        if(event.key == "Escape") {
+          state.idx = -1;
+          render();
+        }
+      });
 
-  /*수정완료 눌렀을 때 갱신 */  
-  if($modifierForm) {
-    $modifierForm.addEventListener('submit',updateItem);
-  }
-
-  $canclers.forEach(function($element) {
-    $element.addEventListener('click',cancleUpdate);
-  })
-
-  if($modifierForm) {
-    $modifierForm.addEventListener('keyup',function(event){
-      if(event.key == "Escape") {
-        state.idx = -1;
-        render();
-      }
-    });
-  }
-
-  $deleters.forEach(function($element) {
+  $app.querySelectorAll('.remover')
+      .forEach(function($element) {
     $element.addEventListener('click', deleteItem);
-  })
-  
-  $complete.forEach(function($element) {
-    $element.addEventListener('click',toggleItem)
-  })
+  });
+
+  $app.querySelectorAll('.complete')
+      .forEach(function($element) {
+        $element.addEventListener('click',toggleItem)
+      });
+
+  $app.querySelectorAll('.cancle')
+      .forEach(function($element) {
+        $element.addEventListener('click',cancleUpdate);
+      });
 }
-
-
 
 function main () {
   render()
