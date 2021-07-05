@@ -112,7 +112,7 @@ export class Item extends Component {
 
         $modifierForm.onkeydown = function(event) {
             if(event.keyCode == 27) {
-                this.cancelModifyItem.bind(this)();
+                this.cancelModifyItem.call(this);
             }
         }.bind(this);
     }
