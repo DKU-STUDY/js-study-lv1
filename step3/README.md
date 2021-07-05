@@ -11,7 +11,8 @@
   - [ ] 아이템 조회
   - [ ] 아이템 추가
     - [ ] 아이템을 추가할 때 자유롭게 고유 ID를 계산해서 저장한다. 
-  - [ ] 아이템 수정
+  - [ ] 아이템 내용 수정
+  - [ ] 아이템 토글
   - [ ] 아이템 삭제
   - [ ] 데이터를 저장할 수 있는 형태로 관리한다.
     - [ ] 파일시스템(json) or MySQL or MongoDB 선택
@@ -37,8 +38,53 @@
 
 ### 아이템 조회
 ```http
+# Request
+GET /api/items
 
+# Response
+[
+  { "idx": 1, "content": "todo item1", "completed": true, "createdAt": 1625484597770 },
+  { "idx": 2, "content": "todo item2", "completed": false, "createdAt": 1625484600000 },
+  { "idx": 3, "content": "todo item3", "completed": false, "createdAt": 1625484712340 }
+]
 ```
+
 ### 아이템 추가
-### 아이템 수정
+```http
+# Request
+POST /api/items
+Content-Type: application/json
+
+{
+  "content": "새로운 Todo Item"
+}
+```
+
+### 아이템 내용 수정
+```http
+# Request
+# 1번 아이템의 내용을 수정
+PUT /api/items/1
+Content-Type: application/json
+
+{
+  "content": "새로운 Todo Item"
+}
+```
+
+### 아이템 토글
+```http
+# Request
+# 1번 아이템을 토글
+PUT /api/items/toggle/1
+Content-Type: application/json
+```
+
 ### 아이템 삭제
+```http
+# Request
+# 1번 아이템을 삭제
+DELETE /api/items/1
+Content-Type: application/json
+```
+
