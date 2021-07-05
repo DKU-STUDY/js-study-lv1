@@ -127,7 +127,7 @@ function render() {
   if ($modifierForm) {
     $modifierForm.addEventListener('submit', updateItem);
     $modifierForm.addEventListener('reset', resetItem);
-    $modifierForm.addEventListener('keydown', (event) => {if(event.code ==='Escape') {state.selectedItem=-1; render();}}
+    $modifierForm.addEventListener('keydown', (event) => { if (event.code === 'Escape') { state.selectedItem = -1; render(); } });
   }
 
 
