@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("\n    template literal"),console.log("test")})();
