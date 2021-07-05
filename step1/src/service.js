@@ -50,14 +50,12 @@ const updateItem = (e) => {
 };
 
 // esc
-(() => {
-  document.addEventListener('keydown', (e) => {
-    const keyCode = e.keyCode;
-    if (keyCode == 27 && state.selectedItem != -1) {
-      CancelItem();
-    }
-  });
-})();
+document.addEventListener('keydown', (e) => {
+  const keyCode = e.keyCode;
+  if (keyCode == 27 && state.selectedItem != -1) {
+    CancelItem();
+  }
+});
 
 const toggleItem = (e) => {
   const key = Number(e.target.dataset.key);
