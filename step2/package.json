@@ -1,11 +1,18 @@
 {
   "name": "step2",
   "version": "1.0.0",
-  "type": "module",
-  "description": "- [ ] 리팩토링\r   - [ ] ECMAScript에 대한 조사\r     - [ ] ECMAScript, Javascript 용어 정리\r     - [ ] ES5 vs ES6 차이점 정리\r   - [ ] 파일을 기능 단위로 분리해본다.\r     - [ ] core: 어플리케이션의 베이스 코드\r     - [ ] components: 컴포넌트 코드\r     - [ ] utils: 유틸리티 성향의 코드\r     - [ ] constants: 상수\r     - [ ] app.js (entry point)\r   - [ ] 다음과 같은 규칙을 지켜가며 코딩한다.\r     - [ ] 한 메소드(함수)에 indent(tab)는 최대 2depth로 유지하기\r     - [ ] else 예약어(keyword)를 쓰지 않는다.\r     - [ ] 상수를 적극적으로 사용한다.\r     - [ ] 한 줄에 점을 하나만 찍는다.\r     - [ ] 줄여쓰지 않는다 (축약 금지)\r - [ ] 번들러 조사 및 적용\r   - [ ] 번들러에 대해 알아보기\r     - [ ] javascript 번들링\r     - [ ] 번들링을 하는 이유, 필요한 이유\r     - [ ] 번들러로 할 수 있는 일들\r   - [ ] 번들러 종류 알아보기\r     - [ ] parcel\r     - [ ] webpack\r     - [ ] rollup\r     - [ ] vite\r   - [ ] 모듈 시스템에 대해 알아보기\r     - [ ] CommonJS\r     - [ ] AMD\r     - [ ] RequireJS\r     - [ ] ESM\r   - [ ] 브라우저 모듈에 대해 알아보기\r   - [ ] 번들러 적용\r     - [ ] 번들러 설치를 위해 nodejs + npm 설치\r     - [ ] Parcel, Webpack, Rollup, Vite 중 택 1",
-  "main": "index.js",
+  "description": "",
+  "main": "webpack.config.js",
+  "private": true,
+  "dependencies": {
+    "webpack-cli": "^4.7.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.42.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
