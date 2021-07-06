@@ -1,8 +1,8 @@
-import {state} from "./state.js";
-import {selectAll, selectOne, checklength} from "./utils.js"
-import {template } from "./template.js";
+import {state} from "./state.js.js";
+import {selectAll, selectOne, checklength } from "./utils.js.js"
+import {template } from "./template.js.js";
 
-$app.innerHTML = template();
+
 const $app = selectOne("#app");
 const $appenderForm = selectOne('form[name="appenderForm"]', $app);
 const $modifiers = selectAll('.modifier', $app);
@@ -78,9 +78,13 @@ const toggleItem = function (event) {
     render();
 }
 export function render() {
+   
     $app.innerHTML = template();
+
+    
     $appenderForm
         .addEventListener('submit', itemAdd); // 이쪽에서 addEventListner null 에러가 납니다
+    
     
     $modifiers
         .forEach(($modifier) => $modifier
@@ -100,11 +104,13 @@ export function render() {
     $cancellers
         .forEach(($canceller) => $canceller
             .addEventListener("click", resetItem));
+    
    
     $deleters
         .forEach(($deleter) => $deleter
             .addEventListener("click", deleteItem));
 
+    
     $complete
         .forEach(($el) => $el
             .addEventListener("click", toggleItem));
