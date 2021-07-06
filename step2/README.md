@@ -18,22 +18,22 @@
     - [ ] 상수를 적극적으로 사용한다.
     - [X] 한 줄에 점을 하나만 찍는다.
     - [X] 줄여쓰지 않는다 (축약 금지)
-- [ ] 번들러 조사 및 적용
-  - [ ] 번들러에 대해 알아보기
+- [X] 번들러 조사 및 적용
+  - [X] 번들러에 대해 알아보기
     - [X] javascript 번들링
     - [X] 번들링을 하는 이유, 필요한 이유
-    - [ ] 번들러로 할 수 있는 일들
-  - [ ] 번들러 종류 알아보기
-    - [ ] parcel
-    - [ ] webpack
-    - [ ] rollup
-    - [ ] vite
-  - [ ] 모듈 시스템에 대해 알아보기
-    - [ ] CommonJS
-    - [ ] AMD
-    - [ ] RequireJS
-    - [ ] ESM
-  - [ ] 브라우저 모듈에 대해 알아보기
+    - [X] 번들러로 할 수 있는 일들
+  - [X] 번들러 종류 알아보기
+    - [X] parcel
+    - [X] webpack
+    - [X] rollup
+    - [X] vite
+  - [X] 모듈 시스템에 대해 알아보기
+    - [X] CommonJS
+    - [X] AMD
+    - [X] RequireJS
+    - [X] ESM
+  - [X] 브라우저 모듈에 대해 알아보기
   - [X] 번들러 적용
     - [X] 번들러 설치를 위해 nodejs + npm 설치
     - [X] Parcel, Webpack, Rollup, Vite 중 택 1
@@ -395,6 +395,96 @@ function 랜덤_숫자_100개_만들기() {
 ## 번들러 종류 알아보기
 
 ### parcel
+
+- parcel은 별도의 설정 없이 번들링을 제공해주는 매우 편리한 번들러이다.
+- 또한 캐싱 및 병렬 처리를 통해 빠른 빌드 속도를 제공해준다.
+
+### webpack
+
+- webpack은 현재 가장 널리 쓰이는 번들러로, 자바스크립트뿐만 아니라 CSS, Image 파일 등 리소스의 의존성도 관리한다.
+- 또한 Minify/Uglify, Banner, CSS Preprocess 작업을 자동화해 주는 Task Runner 기능을 포함하고 있다.
+
+### rollup
+
+- rollup은 webpack과 마찬가지로 크고 복잡한 코드의 모듈(파일)들을 라이브러리나 어플리케이션으로 작게 만들어 주는 번들러이다.
+- 이러한 rollup은 ESM형태로 번들할 수 없는 webpack과 달리 ESM형태로 번들이 가능하다.
+- 또한 모듈 간에 import/export 과정이 사라지기 때문에 중복되는 코드가 제거된다.
+
+### vite
+
+- vite는 모던 브라우저에서 지원하는 <script module>을 이용해 개발시 번들링하지 않고 필요한 모듈만을 HTTP 요청으로 불러와서 실행하게 해주고, 프로덕션 빌드시에는 rollup으로 코드를 번들링해주는 기능을 가지고 있는 떠오르는 웹 개발 도구이다.
+- 매력적인 점은 아무리 프로젝트가 커져도 웹팩은 핫 리로딩도 늦고 개발 서버 구동도 늦어지는 반면 Vite는 일관적인 속도를 가진다. 그리고 개발 시 실제 수정이 일어난 곳만 재컴파일해서 보여주므로 훨씬 빠른 핫 리로딩도 제공한다.
+
+## 모듈 시스템에 대해 알아보기
+
+### CommonJS
+
+- CommonJS는 동기 방식으로 require 함수로 의존성 모듈을 가져오고, module.exports 객체로 모듈의 API를 정의한다
+- 다음은 CommonJS의 예제이다.
+
+```js
+var $ = require('jquery');
+
+function foo() {};
+
+module.exports = {
+    foo: foo
+};
+```
+
+- 위에서 볼 수 있듯이 문법이 직관적이다.
+- CommonJS는 자바스크립트를 브라우저 이외 환경에서 사용하고자 만들어졌기 때문에 브라우저에서 바로 사용할 수 없고, 브라우저에서 CommonJS로 작성한 자바스크립트를 실행하기 위해서는 번들러로 변환과정을 거쳐야한다.
+- 하지만 Node.js는 CommonJS를 사용하기 때문에 Node.js 기반의 서버나 도구를 개발할 때는 CommonJS을 바로 사용할 수 있다.
+
+### AMD
+
+- AMD는 비동기 방식으로 define 함수를 사용하여 모듈의 API와 의존성 관계를 정의한다.
+- 다음은 AMD의 예제이다.
+
+```js
+define(['jquery'], function($) {
+    function foo() {};
+    
+    return {
+        foo: foo
+    };
+});
+```
+
+- AMD는 CommonJS보다는 문법이 직관적이지 않다.
+- 반면 브라우저에서 바로 사용이 가능하고, 동적 로딩을 지원한다.
+- AMD를 지원하는 대표적인 라이브러리로는 RequireJS가 있다.
+
+### RequireJS
+
+- AMD 스펙을 구현한 자바스크립트 라이브러리로, 브러우저에 최적화 되어 있지만, 다른 자바스크립트 환경(Rhino와 Node)에서도 사용할 수 있다.
+- 스크립트를 모듈화하여 관리할 수 있다는 장점이 있다.
+
+### ESM
+
+- ESM은 ECMAScript에서 지원하는 자바스크립트 공식 모듈 시스템으로, 모듈 정의를 위해 export와 import 키워드를 사용한다.
+- 모듈을 외부로 공개하기 위해서는 아래와 같이 export 키워드를 사용한다.
+
+```js
+export function sayHi() {
+    console.log('Hi');
+}
+```
+
+- 또한 모듈을 가져올 때는 아래와 같이 import 키워드를 쓰면 as 키워드로 별칭을 붙일 수도 있다.
+
+```js
+import { sayHi as hi } from './somewhere';
+
+hi();
+```
+
+## 브라우저 모듈에 대해 알아보기
+
+- 브라우저 환경에서의 type="module"
+- 모듈 스크립트가 항상 지연 실행된다. -> 내부적으로 defer속성을 붙인 것처럼 실행됨.
+- src 속성값이 동일한 외부 스크립트는 한 번만 실행된다.
+- import 키워드를 통해 모듈을 가져올 때는 반드시 상대 혹은 절대 경로가 와야 하며, 경로가 없는 모듈은 허용되지 않는다.
 
 ## 번들러 관련 자료
 - [모듈화의 역사](https://medium.com/@chullino/%EC%9B%B9%ED%8C%A9-3-4-js%EB%AA%A8%EB%93%88%ED%99%94-%EC%97%AD%EC%82%AC-%EB%8F%8C%EC%95%84%EB%B3%B4%EA%B8%B0-1-9df997f82002)
