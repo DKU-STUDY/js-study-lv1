@@ -83,7 +83,7 @@ export function render() {
 
     
     $appenderForm
-        .addEventListener('submit', itemAdd);
+        .addEventListener('submit', itemAdd); // 이쪽에서 addEventListner null 에러가 납니다
     
     
     $modifiers
