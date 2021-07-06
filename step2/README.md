@@ -471,7 +471,7 @@ export function sayHi() {
 }
 ```
 
-- 또한 모듈을 가져올 때는 아래와 같이 import 키워드를 쓰면 as 키워드로 별칭을 붙일 수도 있다.
+- 또한 모듈을 가져올 때는 아래와 같이 import 키워드를 쓰며, as 키워드로 별칭을 붙일 수도 있다.
 
 ```js
 import { sayHi as hi } from './somewhere';
