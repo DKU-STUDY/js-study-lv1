@@ -1,4 +1,13 @@
-.idea
-*.iml
+# node js
+node_moduels/
+
+# projects
+dist/
+
+# vscode
 .vscode
-node_modules
+
+
+.cache
+
+dist/
