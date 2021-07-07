@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExpressJS</title>
+    <style>
+        body { font-family: malgun gothic, serif; }
+        * { margin: 0; padding: 0; }
+        ul, li { list-style: none }
+        input, button, textarea, select { vertical-align: middle; font-size: 13px; box-sizing: border-box; cursor: pointer }
+        button[type="submit"] { background: #09F; }
+        input { border: 1px solid #bebebe; height: 30px; border-radius: 3px; padding: 0 10px; }
+        button { background: #aaa; color: #FFF; border: none; height: 30px; width: 60px; border-radius: 3px; }
+        main { width: 1000px; margin: 0 auto }
+        fieldset { border: none; }
+        .btn { width: 100px; }
+        .finish { text-decoration: line-through; }
+        #toggle { color: blue; }
+
+        #app > h1 { text-align: center; padding: 20px 0;}
+        #app > form { border: 1px solid #ddd; padding: 30px; }
+        #app > ul { border: 1px solid #ddd; padding: 30px; margin-top: 20px; background: #fefefe;}
+        #app > ul li { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #ddd; }
+        #app > ul li button { margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>Item List</h1>
+    <form name="insertForm" action="/insertForm" method="get">
+        <fieldset>
+            <button type="submit" class="btn">아이템 등록</button>
+        </fieldset>
+    </form>
+
+    <ul>
+        <% for(var i=0; i<itemList.length; i++) { %>
+            <li>
+                <p
+                        class="<% if(itemList[i].completed) { %>finish<% } else { %>''<% } %>"
+                        id="<% if(itemList[i].highlight) { %>toggle<% } else { %>''<% } %>"
+                >
+                    <input
+                            type="checkbox"
+                            id="<%= itemList[i].seq %>"
+                            onchange="location.href='/toggleItem?seq=<%=itemList[i].seq%>&highlight=<%=itemList[i].highlight%>'"
+                            <% if(itemList[i].highlight == 1) { %>checked<% } else { %>''<% } %>
+                    >
+                    <%= itemList[i].content %>
+                </p>
+                <button type="button" onclick="location.href='/completeItem?seq=<%=itemList[i].seq%>&completed=<%=itemList[i].completed%>'">완료</button>
+                <button type="button" onclick="location.href='/getItem?seq=<%=itemList[i].seq%>'">수정</button>
+                <button type="button" onclick="location.href='/deleteItem?seq=<%=itemList[i].seq%>'">삭제</button>
+            </li>
+        <% } %>
+    </ul>
+
+</div>
+
+</body>
+</html>
