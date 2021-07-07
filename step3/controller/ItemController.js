@@ -1,7 +1,9 @@
 const express = require("express");
-const app = express();
-
+const methodOverride = require("method-override");
 const ItemService = require("../service/ItemService.js");
+
+const app = express();
+app.use(methodOverride('_method'));
 
 app.get('/', (request, response) => {
     ItemService
@@ -22,19 +24,19 @@ app.post('/insertItem', (request, response) => {
     response.redirect('/');
 });
 
-app.post('/modifyItem', (request, response) => {
+app.put('/modifyItem', (request, response) => {
     const itemDTO = [ request.body.content, request.body.seq ];
     ItemService.modifyItem(itemDTO);
     response.redirect('/');
 });
 
-app.get('/deleteItem/:seq', (request, response) => {
+app.delete('/deleteItem/:seq', (request, response) => {
     const itemDTO = [ request.params.seq ];
     ItemService.deleteItem(itemDTO);
     response.redirect('/');
 });
 
-app.get('/completeItem/:seq/:completed', (request, response) => {
+app.put('/completeItem/:seq/:completed', (request, response) => {
     const itemDTO = [
         request.params.completed == 1 ? 0 : 1,
         request.params.seq
@@ -53,7 +55,7 @@ app.get('/toggleItem', (request, response) => {
     response.redirect('/');
 })
 
-app.get('/getItem/:seq', (request, response) => {
+app.get('/item/:seq', (request, response) => {
     const itemDTO = [ request.params.seq ];
     ItemService
         .getItem(itemDTO)

@@ -8,12 +8,12 @@
         * { margin: 0; padding: 0; }
         ul, li { list-style: none }
         input, button, textarea, select { vertical-align: middle; font-size: 13px; box-sizing: border-box; cursor: pointer }
-        button[type="submit"] { background: #09F; }
+        /*button[type="submit"] { background: #09F; }*/
         input { border: 1px solid #bebebe; height: 30px; border-radius: 3px; padding: 0 10px; }
         button { background: #aaa; color: #FFF; border: none; height: 30px; width: 60px; border-radius: 3px; }
         main { width: 1000px; margin: 0 auto }
         fieldset { border: none; }
-        .btn { width: 100px; }
+        .btn { width: 100px; background: #09F; }
         .finish { text-decoration: line-through; }
         #toggle { color: blue; }
 
@@ -37,6 +37,7 @@
     <ul>
         <% for(var i=0; i<itemList.length; i++) { %>
             <li>
+
                 <p
                         class="<% if(itemList[i].completed) { %>finish<% } else { %>''<% } %>"
                         id="<% if(itemList[i].highlight) { %>toggle<% } else { %>''<% } %>"
@@ -49,9 +50,17 @@
                     >
                     <%= itemList[i].content %>
                 </p>
-                <button type="button" onclick="location.href='/completeItem/<%=itemList[i].seq%>/<%=itemList[i].completed%>'">완료</button>
-                <button type="button" onclick="location.href='/getItem/<%=itemList[i].seq%>'">수정</button>
-                <button type="button" onclick="location.href='/deleteItem/<%=itemList[i].seq%>'">삭제</button>
+
+                <form name="completeItem" action="/completeItem/<%=itemList[i].seq%>/<%=itemList[i].completed%>?_method=put" method="post">
+                    <button type="submit">완료</button>
+                </form>
+
+                <button type="button" onclick="location.href='/item/<%=itemList[i].seq%>'">수정</button>
+
+                <form name="deleteItem" action="/deleteItem/<%=itemList[i].seq%>?_method=delete" method="post">
+                    <button type="submit">삭제</button>
+                </form>
+
             </li>
         <% } %>
     </ul>

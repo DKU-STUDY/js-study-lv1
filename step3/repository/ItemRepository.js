@@ -50,7 +50,7 @@ exports.toggleItem = (itemDTO) => {
 exports.getItem = (itemDTO) => {
     return new Promise((resolve, reject) => {
         conn.query(getItem, itemDTO, (error, item) => {
-            if (error) reject(new Error(error));
+            if (error) reject(error);
             else resolve(JSON.parse(JSON.stringify(item)));
         })
     });
@@ -59,7 +59,7 @@ exports.getItem = (itemDTO) => {
 exports.getItemList = () => {
     return new Promise( (resolve, reject) => {
         conn.query(getItemList, (error, itemList) => {
-            if(error) reject(new Error('getItemList failed'));
+            if(error) reject(error);
             else {
                 const list =  JSON.parse(JSON.stringify(itemList));
                 resolve(list);
