@@ -3,12 +3,12 @@
  */
 const todoItems = {
   items: [],              // ex) { id: 1, content: 'todoList만들기', highlight: false, isComplete: false, createdAt: Date.now()}    
-  selectedItem: -1,        // 특정 아이템 체크 여부를 확인하기 위한 변수
+  seletedItem: -1,        // 특정 아이템 체크 여부를 확인하기 위한 변수
 };
 
 const itemTemplate = ({id, content, highlight, isComplete}) => `
         <li>
-            ${todoItems.selectedItem == id ? `
+            ${todoItems.seletedItem == id ? `
                 <form name="modifierForm" action="" id="${id}">
                     <fieldset>
                         <legend hidden>아이템 수정</legend>
@@ -105,7 +105,7 @@ const deleteItem = function(event) {
  const modifyItem = function(event) {
   const modBtn = event.target;
 
-  todoItems.selectedItem = modBtn.id;                                          // 수정 버튼을 누른 아이템을 selectedItem을 통해 체크
+  todoItems.seletedItem = modBtn.id;                                          // 수정 버튼을 누른 아이템을 selectedItem을 통해 체크
   render();
 
   const $modifierForm = document.querySelector('form[name="modifierForm"]');  // 수정 form 조회
@@ -138,7 +138,7 @@ const deleteItem = function(event) {
   const $obj_id = Number(this.id);
   const idx = todoItems.items.map(obj => obj.id).indexOf($obj_id);            // 해당 id를 가진 객체의 인덱스 조회
   todoItems.items[idx].content = value;
-  todoItems.selectedItem = -1;                                                 // 수정이 완료되었기 때문에 수정 form 출력 x
+  todoItems.seletedItem = -1;                                                 // 수정이 완료되었기 때문에 수정 form 출력 x
 
   render();
 }
@@ -147,7 +147,7 @@ const deleteItem = function(event) {
  * 아이템 수정 -> 취소 함수 
  */
 const cancelModifyItem = function(event) {
-  todoItems.selectedItem = -1;                                                 // 취소 버튼 클릭 시 기존의 화면 유지
+  todoItems.seletedItem = -1;                                                 // 취소 버튼 클릭 시 기존의 화면 유지
 
   render();
 }
