@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExpressJS</title>
+    <style>
+        body { font-family: malgun gothic, serif; }
+        * { margin: 0; padding: 0; }
+        ul, li { list-style: none }
+        input, button, textarea, select { vertical-align: middle; font-size: 13px; box-sizing: border-box; cursor: pointer }
+        button[type="submit"] { background: #09F; }
+        input { border: 1px solid #bebebe; height: 30px; border-radius: 3px; padding: 0 10px; }
+        button { background: #aaa; color: #FFF; border: none; height: 30px; width: 60px; border-radius: 3px; }
+        main { width: 1000px; margin: 0 auto }
+        fieldset { border: none; }
+        .btn { width: 100px; }
+
+        #app > h1 { text-align: center; padding: 20px 0;}
+        #app > form { border: 1px solid #ddd; padding: 30px; }
+        #app > ul { border: 1px solid #ddd; padding: 30px; margin-top: 20px; background: #fefefe;}
+        #app > ul li { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #ddd; }
+        #app > ul li button { margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>Insert Form</h1>
+    <form name="insertItem" action="/insertItem" method="post">
+        <fieldset>
+            <input type="text" name="item" size="40" placeholder="아이템 내용을 입력하세요.">
+            <button type="submit" class="btn">등록하기</button>
+        </fieldset>
+    </form>
+
+</div>
+
+</body>
+</html>
