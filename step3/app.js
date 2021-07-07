@@ -5,7 +5,7 @@ const controller = require('./controller/ItemController.js');
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));  // url 쿼리 스트링을 파싱 ex) ?seq=1&title=express -> { seq: '1', title: 'express' }
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // 뷰 엔진 ejs 설정

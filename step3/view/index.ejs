@@ -49,9 +49,9 @@
                     >
                     <%= itemList[i].content %>
                 </p>
-                <button type="button" onclick="location.href='/completeItem?seq=<%=itemList[i].seq%>&completed=<%=itemList[i].completed%>'">완료</button>
-                <button type="button" onclick="location.href='/getItem?seq=<%=itemList[i].seq%>'">수정</button>
-                <button type="button" onclick="location.href='/deleteItem?seq=<%=itemList[i].seq%>'">삭제</button>
+                <button type="button" onclick="location.href='/completeItem/<%=itemList[i].seq%>/<%=itemList[i].completed%>'">완료</button>
+                <button type="button" onclick="location.href='/getItem/<%=itemList[i].seq%>'">수정</button>
+                <button type="button" onclick="location.href='/deleteItem/<%=itemList[i].seq%>'">삭제</button>
             </li>
         <% } %>
     </ul>

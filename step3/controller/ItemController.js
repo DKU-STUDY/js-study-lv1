@@ -28,21 +28,22 @@ app.post('/modifyItem', (request, response) => {
     response.redirect('/');
 });
 
-app.get('/deleteItem', (request, response) => {
-    const itemDTO = [ request.query.seq ];
+app.get('/deleteItem/:seq', (request, response) => {
+    const itemDTO = [ request.params.seq ];
     ItemService.deleteItem(itemDTO);
     response.redirect('/');
 });
 
-app.get('/completeItem', (request, response) => {
+app.get('/completeItem/:seq/:completed', (request, response) => {
     const itemDTO = [
-        request.query.completed == 1 ? 0 : 1,
-        request.query.seq
+        request.params.completed == 1 ? 0 : 1,
+        request.params.seq
     ];
     ItemService.completeItem(itemDTO);
     response.redirect('/');
 });
 
+// url + 쿼리 문자열 사용 -> request.query
 app.get('/toggleItem', (request, response) => {
     const itemDTO = [
         request.query.highlight == 1 ? 0 : 1,
@@ -52,8 +53,8 @@ app.get('/toggleItem', (request, response) => {
     response.redirect('/');
 })
 
-app.get('/getItem', (request, response) => {
-    const itemDTO = [ request.query.seq ];
+app.get('/getItem/:seq', (request, response) => {
+    const itemDTO = [ request.params.seq ];
     ItemService
         .getItem(itemDTO)
         .then(item => response.render('../view/modifyForm.ejs', {
