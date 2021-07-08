@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    main: './step1/src/app.js'
+    main: './src/app.js'
   },
   output: {
     filename: '[name].js',
