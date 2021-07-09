@@ -7,8 +7,7 @@ export default class ItemModifier extends Component{
         const { todoItems, selectedItem } = this.$state;
         return todoItems.map(({id,content,isComplete}) => `
         ${selectedItem === id ? `
-        <li data-id="${id}">
-        <form data-component="modifierForm" action="">
+        <form data-component="modifierForm" data-id="${id}"action="">
         <fieldset>
             <legend hidden>아이템 수정</legend>
             <label>
@@ -18,8 +17,7 @@ export default class ItemModifier extends Component{
             <button type="button" class="update">완료</button>
             <button type="button" class="cancel">취소</button>
         </fieldset>
-        </form>
-        </li>`: ""}`);
+        </form>`: ""}`);
     }
 
     setEvent() {
