@@ -29,10 +29,7 @@ export default class App extends Component{
         return `
         <h1>📃 TodoList</h1>
         <form data-component="appenderForm" action="" method="post"></form>
-        <ul>
-        <li data-component="modifierForm"></li>
-        <li data-component="items></li>
-        </ul>
+        <ul data-component="modifierForm items"></ul>
         `;
     }
     
