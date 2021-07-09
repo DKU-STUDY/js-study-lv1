@@ -61,7 +61,7 @@ export var toggleItem = function(event) {
     render();
   }
 
-export var rendor = function() {
+export var render = function() {
   // app 변수에 template을 넣음(렌더링)
   const $app = document.querySelector('#app');
   $app.innerHTML = template();
