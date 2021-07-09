@@ -5,6 +5,7 @@ import Component from "../core/Component";
 
 
 
+
 export default class App extends Component{
   
     setup() {
@@ -27,8 +28,7 @@ export default class App extends Component{
     template() {
         return `
         <h1>📃 TodoList</h1>
-        <form data-component="appenderForm" action="" method="post">       
-        </form>
+        <form data-component="appenderForm" action="" method="post"></form>
         <ul>
         <li data-component="modifierForm"></li>
         <li data-component="items></li>
@@ -94,7 +94,7 @@ export default class App extends Component{
     updatItem(contents) {
         const todoItems = [...this.$state.todoItems];
         const selectedItem = this.$state.selectedItem;
-        todoItems[selectedItem].content = content;
+        todoItems[selectedItem].content = contents;
         selectedItem = -1;
         this.setState({ todoItems, selectedItem });
     }
