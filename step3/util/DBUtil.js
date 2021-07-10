@@ -18,3 +18,4 @@ module.exports = pool;
  *      date DATE NOT NULL
  * );
  */
+
