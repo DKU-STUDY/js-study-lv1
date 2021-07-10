@@ -19,10 +19,11 @@ export default class ItemAppender extends Component{
     }
     setEvent() {
         const { addItem } = this.$props;
-        this.addEvent("keyup", ".appender", ({key, target}) => {
-            if (key !== 'Enter') return;
-            checklength(target.value.trim())
-            addItem(target.value.trim());
+        this.addEvent("submit", "[data-component='appenderForm']", (event) => {
+            event.preventDefault();
+            const content = this.$target.queryselector(".appender").value.trim()
+            checklength(content);
+            addItem(content);
         });
     }
 }

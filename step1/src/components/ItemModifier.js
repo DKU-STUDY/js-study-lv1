@@ -35,7 +35,7 @@ export default class ItemModifier extends Component{
         });
         this.addEvent("submit", "[data-component='modifierForm']", (event) => {
             event.preventDefault();
-            const content = event.target.querySelector("input").value.trim();
+            const content = this.$target.querySelector("input").value.trim();
             checklength(content);
             updateItem(content);
         });
