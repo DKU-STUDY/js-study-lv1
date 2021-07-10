@@ -21,7 +21,7 @@ export default class ItemAppender extends Component{
         const { addItem } = this.$props;
         this.addEvent("submit", "[data-component='appenderForm']", (event) => {
             event.preventDefault();
-            const content = this.$target.queryselector(".appender").value.trim()
+            const content = this.$target.querySelector(".appender").value.trim();
             checklength(content);
             addItem(content);
         });

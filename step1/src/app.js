@@ -42,9 +42,9 @@ export default class App extends Component {
 
     mounted() {
         const { addItem, deleteItem, toggleItem, resetItem, updateItem, editItem } = this;
-        const $appenderForm = this.$target.querySelector(`[data-component="appenderForm"]`);
-        const $modifierForm = this.$target.querySelector(`[data-coponent="modifierForm"]`);
-        const $items = this.$target.querySelector(`[data-component="items"]`);
+        const $appenderForm = this.$target.querySelector(`[data-component='appenderForm']`);
+        const $modifierForm = this.$target.querySelector(`[data-coponent='modifierForm']`);
+        const $items = this.$target.querySelector(`[data-component='items']`);
 
         new ItemAppender($appenderForm, {
             addItem: addItem.bind(this),
