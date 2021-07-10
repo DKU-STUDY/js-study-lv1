@@ -57,7 +57,7 @@ export default class App extends Component {
         });
         new ItemModifier($modifierForm, {
             resetItem: resetItem.bind(this),
-            updatItem: updateItem.bind(this),
+            updateItem: updateItem.bind(this),
         });
     }
 
@@ -85,20 +85,17 @@ export default class App extends Component {
             todoItems[key].isComplete = !todoItems[key].isComplete;
             this.setState({ todoItems });
         }
-        editItem(id) {
+    editItem(id) {
             this.setState({ selectedItem: id });
         }
         updateItem(contents) {
             const todoItems = [...this.$state.todoItems];
             const selectedItem = this.$state.selectedItem;
             todoItems[selectedItem].content = contents;
-            selectedItem = -1;
-            this.setState({ todoItems, selectedItem });
+            this.setState({ todoItems, selectedItem:-1 });
         }
         resetItem() {
-            const selectedItem = this.$state.selectedItem;
-            selectedItem = -1;
-            this.setState({ selectedItem });
+            this.setState({ selectedItem:-1 });
         }
 
 }

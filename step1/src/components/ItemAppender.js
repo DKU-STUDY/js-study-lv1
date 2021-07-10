@@ -1,4 +1,5 @@
 import Component from "../core/Component.js";
+import { checklength } from "../utils.js";
 
 
 export default class ItemAppender extends Component{

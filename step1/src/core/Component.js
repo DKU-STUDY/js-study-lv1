@@ -10,11 +10,11 @@ export default class Component{
         this.setEvent();
     }
     setup() { };
-    mounnted() { };
+    mounted() { };
     template() { return ``; }
     render() {
         this.$target.innerHTML = this.template();
-        this.mounnted();
+        this.mounted();
     }
     setEvent() { }
     setState(newState) {
