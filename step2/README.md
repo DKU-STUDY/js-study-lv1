@@ -6,11 +6,11 @@
   - [x] ECMAScript에 대한 조사
     - [x] ECMAScript, Javascript 용어 정리
     - [x] ES5 vs ES6 차이점 정리
-  - [ ] 파일을 기능 단위로 분리해본다.
-    - [ ] core: 어플리케이션의 베이스 코드
-    - [ ] components: 컴포넌트 코드
+  - [X] 파일을 기능 단위로 분리해본다.
+    - [X] core: 어플리케이션의 베이스 코드
+    - [X] components: 컴포넌트 코드
     - [x] utils: 유틸리티 성향의 코드
-    - [ ] constants: 상수
+    - [X] constants: 상수
     - [x] app.js (entry point)
   - [x] 다음과 같은 규칙을 지켜가며 코딩한다.
     - [x] 한 메소드(함수)에 indent(tab)는 최대 2depth로 유지하기

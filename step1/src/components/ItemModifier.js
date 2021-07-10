@@ -1,11 +1,13 @@
-import Component from "../core/Component";
-import { selectAll,selectOne,checklength } from "../utils";
+import Component from "../core/Component.js";
+import { checklength } from "../utils.js";
+
+
 
 export default class ItemModifier extends Component{
 
     template() {
         const { todoItems, selectedItem } = this.$state;
-        return todoItems.map(({id,content,isComplete}) => `
+        return todoItems.map(({id,content}) => `
         ${selectedItem === id ? `
         <li>
         <form data-component="modifierForm" data-id="${id}"action="">
@@ -24,7 +26,6 @@ export default class ItemModifier extends Component{
 
     setEvent() {
         const { resetItem, updateItem } = this.$props;
-        const {selectedItem} = this.$state;
         this.addEvent("keydown", "[data-component='modifierForm']", (event) => {
             if (event.code === 'Escape')
                 resetItem();
