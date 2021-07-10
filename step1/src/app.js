@@ -28,9 +28,9 @@ export default class App extends Component {
     template() {
         return `
             <h1>📃 TodoList</h1>
-            <form data-component="appenderForm" action="" method="post"></form>
-            <ul data-component="modifierForm items"></ul>
-            <ul data-component="itmes" action="" method="post"></ul>
+            <div data-component='appenderForm'></div>
+            <ul data-component='modifierForm'></ul>
+            <ul data-component='itmes' action="" method="post"></ul>
         `;
     }
     

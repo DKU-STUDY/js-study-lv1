@@ -10,14 +10,14 @@ export default class ItemModifier extends Component{
         return todoItems.map(({id,content}) => `
         ${selectedItem === id ? `
         <li>
-        <form data-component="modifierForm" data-id="${id}"action="">
+        <form class="modifier" data-id="${id}"action="">
         <fieldset>
             <legend hidden>아이템 수정</legend>
             <label>
             <span hidden>아이템 수정</span>
             <input type="text" value=${content} size="40">
             </label>
-            <button type="button" class="update">완료</button>
+            <button type="submit" class="update">완료</button>
             <button type="button" class="cancel">취소</button>
         </fieldset>
         </form>
@@ -33,7 +33,7 @@ export default class ItemModifier extends Component{
         this.addEvent("click", ".cancel", () => {
             resetItem();
         });
-        this.addEvent("submit", "[data-component='modifierForm']", (event) => {
+        this.addEvent("submit", ".modifier" , (event) => {
             event.preventDefault();
             const content = this.$target.querySelector("input").value.trim();
             checklength(content);
