@@ -2,11 +2,11 @@
 
 ## 요구사항
 
-- [ ] 사전 조사
-  - [ ] NodeJS에 대한 개념 (간략히)
-  - [ ] Javascript와 NodeJS의 공통점/차이점
-  - [ ] RESTful, RESTAPI 등에 대해 조사하기
-  - [ ] express.js에 대한 개념 (간략히)
+- [x] 사전 조사
+  - [x] NodeJS에 대한 개념 (간략히)
+  - [x] Javascript와 NodeJS의 공통점/차이점
+  - [x] RESTful, RESTAPI 등에 대해 조사하기
+  - [x] express.js에 대한 개념 (간략히)
 - [x] 기능구현
   - [x] 아이템 조회
   - [x] 아이템 추가
