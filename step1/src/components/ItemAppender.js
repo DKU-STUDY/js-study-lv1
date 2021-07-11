@@ -1,9 +1,9 @@
 import Component from "../core/Component.js";
 import { checklength } from "../utils.js";
-
+import { selectOne } from "../utils.js";
 
 export default class ItemAppender extends Component{
-
+    
 
     template() {
         return `
@@ -19,13 +19,16 @@ export default class ItemAppender extends Component{
             </form>
          `
     }
+    
     setEvent() {
         const { addItem } = this.$props;
+        
         this.addEvent("submit", ".appender", (event) => {
             event.preventDefault();
-            const content = this.$target.querySelector("input").value.trim();
+            const content = event.target.querySelector("input").value;
             checklength(content);
             addItem(content);
+            content = '';
         });
     }
 }

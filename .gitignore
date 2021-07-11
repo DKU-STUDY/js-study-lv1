@@ -1,6 +1,8 @@
 # node js
 node_modueles/
 
+
+
 # projects
 dist/
 
@@ -11,3 +13,4 @@ dist/
 .cache
 
 dist/
+node_modules

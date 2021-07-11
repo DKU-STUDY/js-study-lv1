@@ -6,7 +6,7 @@ import { checklength } from "../utils.js";
 export default class ItemModifier extends Component{
 
     template() {
-        const { todoItems, selectedItem } = this.$state;
+        const { todoItems, selectedItem } = this.$props;
         return todoItems.map(({id,content}) => `
         ${selectedItem === id ? `
         <li>

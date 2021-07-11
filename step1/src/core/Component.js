@@ -22,7 +22,7 @@ export default class Component{
         this.render();
     }
     addEvent(eventType, selector, callback) {
-        const children = [...this.$target.querySelectorforAll(selector)];
+        const children = [...this.$target.querySelectorAll(selector)];
         const isTarget = (target) => children.includes(target) || target.closest(selector);
         this.$target.addEventListener(eventType, event => {
             if (!isTarget(event.target)) return false;

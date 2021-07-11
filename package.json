@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/inust33/js-study-lv1/issues"
   },
-  "homepage": "https://github.com/inust33/js-study-lv1#readme"
+  "homepage": "https://github.com/inust33/js-study-lv1#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
 }
