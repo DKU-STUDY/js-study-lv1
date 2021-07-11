@@ -12,7 +12,7 @@ ItemsRouter.get('/items', (_, res: Response) => {
 ItemsRouter.post('/items', (req: Request, res: Response) => {
   const content: string | undefined = req.body?.content;
   if (content === undefined) {
-    res.json({ success: false, error: 'content를 입력해주세요.' });
+    res.status(400).json({ success: false, error: 'content를 입력해주세요.' });
     return;
   }
 
@@ -25,20 +25,20 @@ ItemsRouter.post('/items', (req: Request, res: Response) => {
   };
   repository.set([...todoItems, newItem]);
 
-  res.json({ success: true });
+  res.status(200).json({ success: true });
 });
 
 ItemsRouter.put('/items/:idx', (req: Request, res: Response) => {
   const content: string | undefined = req.body?.content;
   if (content === undefined) {
-    res.json({ success: false, error: 'content를 입력해주세요.' });
+    res.status(400).json({ success: false, error: 'content를 입력해주세요.' });
     return;
   }
 
   const todoItems: TodoItem[] = repository.get();
   const idx: number = +req?.params?.idx;
-  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx).length === 0) {
-    res.json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
+  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx)?.length === 0) {
+    res.status(400).json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
     return;
   }
 
@@ -49,14 +49,14 @@ ItemsRouter.put('/items/:idx', (req: Request, res: Response) => {
     });
   repository.set(todoItems);
 
-  res.json({ success: true });
+  res.status(200).json({ success: true });
 });
 
 ItemsRouter.put('/items/toggle/:idx', (req: Request, res: Response) => {
   const todoItems: TodoItem[] = repository.get();
   const idx: number = +req?.params?.idx;
-  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx).length === 0) {
-    res.json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
+  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx)?.length === 0) {
+    res.status(400).json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
     return;
   }
 
@@ -68,20 +68,20 @@ ItemsRouter.put('/items/toggle/:idx', (req: Request, res: Response) => {
     });
   repository.set(todoItems);
 
-  res.json({ success: true });
+  res.status(200).json({ success: true });
 });
 
 ItemsRouter.delete('/items/:idx', (req: Request, res: Response) => {
   const todoItems: TodoItem[] = repository.get();
   const idx: number = +req?.params?.idx;
-  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx).length === 0) {
-    res.json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
+  if (isNaN(idx) || todoItems.filter((item) => item.idx === idx)?.length === 0) {
+    res.status(400).json({ success: false, error: `${req.params?.idx}: 존재하지 않는 아이템입니다.` });
     return;
   }
 
   repository.set(todoItems.filter((item) => item.idx !== idx));
 
-  res.json({ success: true });
+  res.status(200).json({ success: true });
 });
 
 export default ItemsRouter;
