@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+수정
+<div id="app">
+  <ul></ul>
+
+  <input id="appender" />
+</div>
+
+<script>
+  const $target = document.querySelector('#app ul');
+
+  function render (items) {
+    $target.innerHTML = items.map(item => {
+      return '<li>' + item.content + '</li>'
+    }).join('');
+  }
+
+  async function getItems () {
+    console.log('getItems (1)')
+    fetch('/api/items')
+      .then(response => response.json())
+      .then(items => {
+        render(items);
+        console.log('getItems (2)')
+      });
+    console.log('getItems (3)')
+  }
+
+  getItems();
+
+  appender.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    fetch('/api/items', {
+      method: 'post',
+      headers,
+      body: JSON.stringify({ content: e.target.value })
+    }).then(() => getItems());
+
+    e.target.value = '';
+  })
+</script>
+</body>
+</html>
