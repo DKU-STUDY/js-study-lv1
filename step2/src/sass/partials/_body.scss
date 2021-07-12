@@ -1,0 +1,12 @@
+// src/sass/partials/_body.scss
+body {
+  color: $font_color;
+
+  // Property Nesting
+  font: {
+    size: $font_size;
+    family: $font_family;
+  }
+
+  line-height: $line_height;
+}
