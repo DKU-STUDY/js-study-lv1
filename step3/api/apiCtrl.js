@@ -30,7 +30,7 @@ const putItem = (req, res) => {
   res.json(items);
 };
 
-const delteItem = (req, res) => {
+const deleteItem = (req, res) => {
   const index = items.findIndex((v) => v.idx === Number(req.params.idx));
   if (index === -1) return res.status(400).end();
   items.splice(index, 1);
@@ -38,7 +38,7 @@ const delteItem = (req, res) => {
   res.status(204).json(items);
 };
 
-const togleItem = (req, res) => {
+const toggleItem = (req, res) => {
   const item = items.find((v) => v.idx === Number(req.params.idx));
   if (!item) return res.status(400).end();
   item.completed = !item.completed;
@@ -50,6 +50,6 @@ module.exports = {
   getItem,
   postItem,
   putItem,
-  delteItem,
-  togleItem
+  deleteItem,
+  toggleItem
 };

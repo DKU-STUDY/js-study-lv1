@@ -8,5 +8,5 @@ app.use(express.json());
 app.use('/api', api);
 
 app.listen(PORT, () => {
-  console.log('hello world');
+  console.log('hello world!');
 });
