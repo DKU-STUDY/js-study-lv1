@@ -15,7 +15,7 @@ const postItem = (req, res) => {
   items.push({
     idx: uuidv4(),
     content: req.body.content,
-    completed: false,
+    isComplete: false,
     createdAt: Date.now()
   });
   save();
@@ -31,7 +31,7 @@ const putItem = (req, res) => {
 };
 
 const deleteItem = (req, res) => {
-  const index = items.findIndex((v) => v.idx === Number(req.params.idx));
+  const index = items.findIndex((v) => v.idx === req.params.idx);
   if (index === -1) return res.status(400).end();
   items.splice(index, 1);
   save();
@@ -39,9 +39,9 @@ const deleteItem = (req, res) => {
 };
 
 const toggleItem = (req, res) => {
-  const item = items.find((v) => v.idx === Number(req.params.idx));
+  const item = items.find((v) => v.idx === req.params.idx);
   if (!item) return res.status(400).end();
-  item.completed = !item.completed;
+  item.isComplete = !item.isComplete;
   save();
   res.json(items);
 };

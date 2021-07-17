@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require('./apiCtrl');
+const control = require('./apiControl');
 
-router.get('/items', ctrl.getItem);
-router.post('/items', ctrl.postItem);
-router.put('/items/edit/:idx', ctrl.putItem);
-router.put('/items/toggle/:idx', ctrl.toggleItem);
-router.delete('/items/:idx', ctrl.deleteItem);
+router.get('/items', control.getItem);
+router.post('/items', control.postItem);
+router.put('/items/edit/:idx', control.putItem);
+router.put('/items/toggle/:idx', control.toggleItem);
+router.delete('/items/:idx', control.deleteItem);
 
 module.exports = router;

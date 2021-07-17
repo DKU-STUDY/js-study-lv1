@@ -1,4 +1,1 @@
-[
-  { "idx": 1, "content": "새로운 내용", "completed": false, "createdAt": 1625712542989 },
-  { "idx": 2, "content": "새로운 내용", "completed": true, "createdAt": 1625712545482 }
-]
+[{"idx":"b4c38c9e-0744-44b0-96d7-9c0e2062ab7e","content":"새로운 내용","isComplete":false,"createdAt":1626498827309},{"idx":"f38fc298-5986-4551-9b97-4c5e3861c9df","content":"새로운 내용","isComplete":false,"createdAt":1626499497769},{"idx":"dee4f948-3a9d-432e-8c5a-546d9c98e420","content":"새로운 내용","isComplete":false,"createdAt":1626499911764}]
