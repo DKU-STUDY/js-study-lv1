@@ -1,0 +1,19 @@
+{
+  "name": "step4",
+  "version": "1.0.0",
+  "description": "Step2에서 작업한 내용과 Step3에서 작업한 내용을 합치는 과정",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "webpack": "^5.45.1"
+  }
+}
