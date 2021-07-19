@@ -5,6 +5,8 @@ export const state = {
   selectedItem: -1
 };
 
+const BASE_URL = 'http://localhost:3000';
+
 const addItem = (e) => {
   e.preventDefault();
   const content = e.target.querySelector('input').value.trim();
@@ -13,7 +15,7 @@ const addItem = (e) => {
   }
   const myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
-  fetch('http://localhost:3000/api/items', {
+  fetch(`${BASE_URL}/api/items`, {
     method: 'post',
     headers: myHeaders,
     body: JSON.stringify({ content: content })
@@ -34,7 +36,7 @@ const deleteItem = (e) => {
   e.preventDefault();
   const key = Number(e.target.dataset.key);
   console.log(key);
-  fetch(`http://localhost:3000/api/items/${state.todoItems[key].idx}`, {
+  fetch(`${BASE_URL}/api/items/${state.todoItems[key].idx}`, {
     method: 'delete'
   }).then(render());
 };
@@ -42,19 +44,17 @@ const deleteItem = (e) => {
 const updateItem = (e) => {
   e.preventDefault();
   const content = e.target.querySelector('input').value.trim();
+  console.log(content);
   if (content.length === 0) {
     return alert('아이템 내용을 입력해주세요');
   }
   const myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
-  fetch(
-    `http://localhost:3000/api/items/edit/${state.todoItems[state.selectedItem].idx}`,
-    {
-      method: 'put',
-      headers: myHeaders,
-      body: JSON.stringify({ content: content })
-    }
-  )
+  fetch(`${BASE_URL}/api/items/edit/${state.todoItems[state.selectedItem].idx}`, {
+    method: 'put',
+    headers: myHeaders,
+    body: JSON.stringify({ content: content })
+  })
     .then((state.selectedItem = -1))
     .then(render());
 };
@@ -71,17 +71,16 @@ const toggleItem = (e) => {
   e.preventDefault();
   const key = Number(e.target.dataset.key);
   const item = state.todoItems[key];
-  fetch(`http://localhost:3000/api/items/toggle/${state.todoItems[key].idx}`, {
+  fetch(`${BASE_URL}/api/items/toggle/${state.todoItems[key].idx}`, {
     method: 'put',
     body: JSON.stringify({ isComplete: !item.isComplete })
   }).then(render());
 };
 
 export const render = async () => {
-  await fetch('http://localhost:3000/api/items')
+  await fetch(`${BASE_URL}/api/items`)
     .then((res) => res.json())
     .then((items) => {
-      console.log(items);
       state.todoItems = items;
     });
   const $app = document.querySelector('#app');

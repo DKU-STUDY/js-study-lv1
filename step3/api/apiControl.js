@@ -23,7 +23,7 @@ const postItem = (req, res) => {
 };
 
 const putItem = (req, res) => {
-  const item = items.find((v) => v.idx === Number(req.params.idx));
+  const item = items.find((v) => v.idx === req.params.idx);
   if (!item) return res.status(400).end();
   item.content = req.body.content;
   save();
