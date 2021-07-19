@@ -1,6 +1,24 @@
 import {state} from "./state.js";
 import {template} from "./template.js"
 
+function postData(url = '', data = {}) {
+  // Default options are marked with *
+    return fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+    .then(response => response.json()); // parses JSON response into native JavaScript objects
+}
+
 /*item 추가 함수 */
 export var addItem = function (event) {
     event.preventDefault();
@@ -18,6 +36,11 @@ export var addItem = function (event) {
       isComplete: false,
       createtime: Date.now(),
     })  
+
+    postData('/app/items', {content: content})
+    .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+    .catch(error => console.error(error));
+    
     render();
   }
   
@@ -37,7 +60,24 @@ export var updateItem = function(event) {
     }
   
     state.items[state.idx].content = content;
+
+    fetch(`/app/items/${state.idx +1}`, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify({content:content}), // body data type must match "Content-Type" header
+    }).then(res=>res.json())
+      .then(console.log("updated completed!"));
+
     state.idx = -1;
+
     render();
   }
   
@@ -52,6 +92,21 @@ export var cancleUpdate = function(event) {
 export var deleteItem = function(event) {
     const key = Number(event.target.dataset.key); 
     state.items.splice(key,1);
+
+    fetch(`app/items/${key + 1}`, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+    }).then(res => res.json())
+      .then(console.log("item removed!"))
+
     render();
   }
   
@@ -62,7 +117,27 @@ export var toggleItem = function(event) {
     render();
   }
 
-export var render = function() {
+export var render = async function() {
+  /*처음 랜더링 할 때 */
+
+  await fetch('/app/items', {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+  }).then(res => res.json())
+    .then(function(item) {
+      for(let i = 0; i< item.length;++i)
+        state.items[i] = item[i];
+      console.log("1",state.items)
+
+      })
 
   // app 변수에 template을 넣음(렌더링)
   const $app = document.querySelector('#app');

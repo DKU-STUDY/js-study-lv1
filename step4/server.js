@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 
-PORT = 3000;
+PORT = 5000;
 
 const getItems = () => {
     const getItems = JSON.parse(fs.readFileSync('./data.json','utf-8'));
@@ -20,9 +20,10 @@ function updateIdx(items) {
 }
 
 app.use(express.json());
+app.use(express.static(__dirname+'/src'));
 
 app.get('/', (req, res) => {
-	res.send(fs.readFileSync('./index.html','utf-8'));
+	res.send(fs.readFileSync(__dirname+'/index.html','utf-8'));
 });
 
 app.get('/app/items', (req, res) => {
