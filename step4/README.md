@@ -8,10 +8,10 @@ Step2에서 작업한 내용과 Step3에서 작업한 내용을 합치는 과정
   - [X] Fetch API
   - [ ] CORS
   - [X] Promise, async, await
-- [ ] API 연동하기
-  - [ ] 번들러로 빌드 하기
-  - [ ] 빌드한 HTML/CSS/JS를 Server와 연동하기
-  - [ ] fetch api를 이용하여 html에서 server 데이터 가져오기
+- [X] API 연동하기
+  - [X] 번들러로 빌드 하기
+  - [X] 빌드한 HTML/CSS/JS를 Server와 연동하기
+  - [X] fetch api를 이용하여 html에서 server 데이터 가져오기
 
 ## 사전 조사에 대한 참고 링크
 

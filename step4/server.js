@@ -20,7 +20,7 @@ function updateIdx(items) {
 }
 
 app.use(express.json());
-app.use(express.static(__dirname+'/src'));
+app.use(express.static(__dirname+'/dist'));
 
 app.get('/', (req, res) => {
 	res.send(fs.readFileSync(__dirname+'/index.html','utf-8'));
