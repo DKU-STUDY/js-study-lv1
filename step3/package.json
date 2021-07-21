@@ -1,0 +1,12 @@
+{
+  "name": "step3",
+  "version": "1.0.0",
+  "description": "- [ ] 사전 조사\r   - [ ] NodeJS에 대한 개념 (간략히)\r   - [ ] Javascript와 NodeJS의 공통점/차이점\r   - [ ] RESTful, RESTAPI 등에 대해 조사하기\r   - [ ] express.js에 대한 개념 (간략히)\r - [ ] 기능구현\r   - [ ] 아이템 조회\r   - [ ] 아이템 추가\r     - [ ] 아이템을 추가할 때 자유롭게 고유 ID를 계산해서 저장한다. \r   - [ ] 아이템 내용 수정\r   - [ ] 아이템 토글\r   - [ ] 아이템 삭제\r   - [ ] 데이터를 저장할 수 있는 형태로 관리한다.\r     - [ ] 파일시스템(json) or MySQL or MongoDB 선택",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
