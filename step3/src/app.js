@@ -23,14 +23,14 @@ export default class App extends Component {
                 }
             ],
             selectedItem: -1
-        }
+        };
     }
     template() {
         return `
             <h1>📃 TodoList</h1>
             <div data-component='appenderForm'></div>
             <ul data-component='modifierForm'></ul>
-            <ul data-component='itmes' action="" method="post"></ul>
+            <ul data-component='items' action="" method="post"></ul>
         `;
     }
     
@@ -42,32 +42,41 @@ export default class App extends Component {
 
     mounted() {
         const { addItem, deleteItem, toggleItem, resetItem, updateItem, editItem } = this;
+        const todoItems = this.$state.todoItems;
+        const selectedItem = this.$state.selectedItem;
         const $appenderForm = this.$target.querySelector(`[data-component='appenderForm']`);
-        const $modifierForm = this.$target.querySelector(`[data-coponent='modifierForm']`);
+        const $modifierForm = this.$target.querySelector(`[data-component='modifierForm']`);
         const $items = this.$target.querySelector(`[data-component='items']`);
 
         new ItemAppender($appenderForm, {
             addItem: addItem.bind(this),
+            todoItems: todoItems,
+            selectedItem: selectedItem
         });
 
         new Items($items, {
             deleteItem: deleteItem.bind(this),
             editItem: editItem.bind(this),
-            toggleItem: toggleItem.bind(this)
+            toggleItem: toggleItem.bind(this),
+            todoItems: todoItems,
+            selectedItem: selectedItem
         });
+        
         new ItemModifier($modifierForm, {
             resetItem: resetItem.bind(this),
             updateItem: updateItem.bind(this),
+            todoItems: todoItems,
+            selectedItem: selectedItem
         });
     }
 
-        addItem(contents){
+        addItem(content){
             const { todoItems } = this.$state;
-            const id = Math.max(0, ...todoItems.map(item => item.id) + 1);
+            const id = Math.max(0, ...todoItems.map(item => item.id)) + 1;
             const isComplete = false;
             this.setState({
                 todoItems: [
-                    ...todoItems, { id, contents, isComplete }
+                    ...todoItems, { id, content, isComplete }
                 ]
             });
         }
@@ -85,7 +94,7 @@ export default class App extends Component {
             todoItems[key].isComplete = !todoItems[key].isComplete;
             this.setState({ todoItems });
         }
-    editItem(id) {
+        editItem(id) {
             this.setState({ selectedItem: id });
         }
         updateItem(contents) {
