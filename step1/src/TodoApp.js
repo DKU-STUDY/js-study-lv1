@@ -40,6 +40,8 @@ class TodoApp extends Component{
 
     addTodo(){
         event.preventDefault();
+        // console.log(event);
+        // console.log(this);
         const content = event.target.querySelector('input').value.trim();
         if(content.length === 0) return alert('Todo Item 내용을 입력해주세요');
         const newItem = {
@@ -82,6 +84,7 @@ class TodoApp extends Component{
         todoItems[keyNum].isComplete = !todoItems[keyNum].isComplete;
         this.setState({ todoItems });
     }
+
 
 }
 
