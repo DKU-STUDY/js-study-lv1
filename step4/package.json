@@ -1,0 +1,23 @@
+{
+  "name": "step2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "webpack-cli": "^4.7.2"
+  },
+  "devDependencies": {
+    "ejs": "^3.1.6",
+    "mysql2": "^2.2.5",
+    "webpack": "^5.42.0"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
