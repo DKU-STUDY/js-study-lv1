@@ -1,0 +1,11 @@
+# node js
+node_moduels/**
+
+# projects
+dist/**
+
+# vscode
+.vscode/**
+
+# yarn
+yarn*.lock
