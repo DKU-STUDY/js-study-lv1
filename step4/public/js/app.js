@@ -11,17 +11,17 @@ const sendHttpRequest = (method, url, data) => {
         body: JSON.stringify(data),
         headers: data? {'Content-Type': 'application/json'} : {}
     })
-    .then(response => {
-        if(response.status >= 400){
-            return response.json().then(errResData => {
-                const error = new Error('Something went wrong!');
-                error.data = errResData;
-                throw error;
-            });
-        }
-        // console.log(response);
-        return response.json();
-    });
+        .then(response => {
+            if(response.status >= 400){
+                return response.json().then(errResData => {
+                    const error = new Error('Something went wrong!');
+                    error.data = errResData;
+                    throw error;
+                });
+            }
+            // console.log(response);
+            return response.json();
+        });
 };
 
 // 아이템 템플릿
@@ -41,7 +41,7 @@ const itemTemplate = (items, selectedItem) => `${items.map((item) => {
     return `
         <li>
             <p ${item.completed ? 'style="color:#09f;text-decoration-line:line-through"': ''}>
-                <input class="complete" type="checkbox" ${item.completed ? 'checked' : ''} />
+                <input class="complete" type="checkbox" ${item.completed ? 'checked' : ''} data-idx="${item.id}" />
                 ${item.content}
             </p>
             <button type="button" class="modifier" data-idx="${item.id}">수정</button>
@@ -50,41 +50,69 @@ const itemTemplate = (items, selectedItem) => `${items.map((item) => {
 }).join('')}
 `;
 
+const setEvent = () => {
+    addEvent('click', '.modifier', editItem);
+    addEvent('click', '.cancelEditBtn', cancelEdit);
+
+}
+
+const addEvent = (eventType, selector, callback) => {
+    const children = [...$app.querySelectorAll(selector)];
+    console.log('addEvent run!');
+    const isTarget = (target) => children.includes(target) || target.closest(selector);
+    $app.addEventListener(eventType, event => {
+        if(!isTarget(event.target)) return false;
+        console.log(this);
+        callback(event);
+    });
+}
+
 
 // 아이템 render
-function render(data){
+const render = (data) => {
     // console.log(data.selectedItem);
     $itemList.innerHTML = itemTemplate(data.items, data.selectedItem);
 
-    // 아이템 수정 버튼 관리
-    const $modifiers = $app.querySelectorAll('.modifier');
-    $modifiers.forEach(($modifier) => {
-        $modifier.addEventListener('click', editItem);
-    });
+    // // 아이템 수정 버튼 관리
+    // const $modifiers = $app.querySelectorAll('.modifier');
+    // $modifiers.forEach(($modifier) => {
+    //     $modifier.addEventListener('click', editItem);
+    // });
 
     // 아이템 수정 관리
     const $modifierForm = document.querySelector('form[name="modifierForm"]');
     if($modifierForm){
         $modifierForm.addEventListener('submit', updateItem);
-        // 아이템 수정 취소 버튼 관리
-        const $cancelEditBtns = $app.querySelectorAll('.cancelEditBtn');
-        $cancelEditBtns.forEach(($cancelEditBtn) => {
-            $cancelEditBtn.addEventListener('click', cancelEdit);
-        });
+        // // 아이템 수정 취소 버튼 관리
+        // const $cancelEditBtns = $app.querySelectorAll('.cancelEditBtn');
+        // $cancelEditBtns.forEach(($cancelEditBtn) => {
+        //     $cancelEditBtn.addEventListener('click', cancelEdit);
+        // });
     }
+
+    const $toggles = $app.querySelectorAll('.complete');
+    $toggles.forEach(($toggle) => {
+        $toggle.addEventListener('click', toggleItem);
+    });
+
+    const $deleters = $app.querySelectorAll('.deleter');
+    $deleters.forEach(($deleter) => {
+        $deleter.addEventListener('click', deleteItem);
+    });
 
 }
 
 // 아이템 조회
 const viewItem = () => {
     sendHttpRequest('GET', '/api/items')
-    .then(responseData => {
-        // console.log(responseData);
-        render(responseData);
-    })
-    .catch(err => {
-        console.error(err, err.data);
-    });
+        .then(responseData => {
+            render(responseData);
+            $appenderForm.querySelector('input').value = '';
+            $appenderForm.querySelector('input').focus();
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
 };
 
 // 아이템 추가
@@ -95,16 +123,16 @@ const addItem = (event) => {
     }
 
     sendHttpRequest('POST', '/api/items', item)
-    .then(responseData => {
-        console.log(responseData);
-    })
-    .catch(err => {
-        console.error(err, err.data);
-    });
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
 
     viewItem();
-    event.target.querySelector('input').value = '';
-    event.target.querySelector('input').focus();
+    // event.target.querySelector('input').value = '';
+    // event.target.querySelector('input').focus();
 
 }
 
@@ -115,12 +143,12 @@ const editItem = (event) => {
     };
     
     sendHttpRequest('PUT', '/api/items', selectedItem)
-    .then(responseData => {
-        console.log(responseData);
-    })
-    .catch(err => {
-        console.error(err, err.data);
-    });
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
 
     viewItem();
 }
@@ -132,12 +160,12 @@ const cancelEdit = () => {
     };
 
     sendHttpRequest('PUT', '/api/items', selectedItem)
-    .then(responseData => {
-        console.log(responseData);
-    })
-    .catch(err => {
-        console.error(err, err.data);
-    });
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
 
     viewItem();
 };
@@ -145,31 +173,56 @@ const cancelEdit = () => {
 // 아이템 수정
 const updateItem = (event) => {
     event.preventDefault();
-
     // 특정 아이템을 찾아서 업데이트
     const itemId = event.target.querySelector('input').dataset.idx;
-    console.log(itemId);
-
     const item = {
         content: event.target.querySelector('input').value
-    }
-    console.log(item);
+    };
 
     sendHttpRequest('PUT', '/api/items/' + itemId, item)
-    .then(responseData => {
-        console.log(responseData);
-    })
-    .catch(err => {
-        console.error(err, err.data);
-    });
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
 
     viewItem();
+};
 
+// 아이템 토글
+const toggleItem = (event) => {
+    const itemId = event.target.dataset.idx;
+    
+    sendHttpRequest('PUT', '/api/items/toggle/' + itemId)
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
+
+    viewItem();
 };
 
 // 아이템 삭제
-// 구현 예정
+const deleteItem = (event) => {
+    const itemId = event.target.dataset.idx;
+
+    sendHttpRequest('DELETE', '/api/items/' + itemId)
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(err => {
+            console.error(err, err.data);
+        });
+
+    viewItem();
+};
 
 $appenderForm.addEventListener('submit', addItem);
 
 viewItem(); // 아이템 조회 실행
+//이벤트 등록
+
+setEvent();
