@@ -1,6 +1,7 @@
 import Component from './Component.js';
 
 export default class TodoAppender extends Component{
+    
     template(){
         return `
             <form name="appenderForm" action="" method="post">
@@ -15,6 +16,7 @@ export default class TodoAppender extends Component{
             </form>
         `;
     }
+
     setEvent(){
         const { addTodo } = this.$props;
         this.$target.addEventListener('submit', addTodo);

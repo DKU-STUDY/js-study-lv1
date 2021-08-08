@@ -1,18 +1,15 @@
 import Component from '../core/Component.js';
 
 export default class TodoList extends Component{  
-    template(){
-        // return `
-        //     <div style='background-color: yellow'>ㅎㅇㅎㅇ</div>
-        // `;
+    
+  template(){
         const { todoItems, selectedItem } = this.$props.todoList;
         
-        // const { todoItems, selectedItem } = this.$state;
-        return `${todoItems.map((todoItem, key) => {
-            if(key === selectedItem){
+        return `${todoItems.map((todoItem) => {
+            if(todoItem.id === selectedItem){
               return `
                 <li>
-                  <form name="modifierForm" action="">
+                  <form name="modifierForm" action="" data-idx="${todoItem.id}">
                     <fieldset>
                       <legend hidden>아이템 수정</legend>
                       <label>
@@ -29,11 +26,11 @@ export default class TodoList extends Component{
             return `
               <li>
                 <p ${todoItem.isComplete ? 'style="color:#09f;text-decoration-line:line-through"': ''}>
-                  <input class="toggle" type="checkbox" ${todoItem.isComplete ? 'checked' : ''} data-key="${key}"/>
+                  <input class="toggle" type="checkbox" ${todoItem.isComplete ? 'checked' : ''} data-idx="${todoItem.id}"/>
                   ${todoItem.content}
                 </p>
-                <button type="button" class="modifier" data-key="${key}">수정</button>
-                <button type="button" class="deleter" data-key="${key}">삭제</button>
+                <button type="button" class="modifier" data-idx="${todoItem.id}">수정</button>
+                <button type="button" class="deleter" data-idx="${todoItem.id}">삭제</button>
               </li>`;
           }).join('')}
           `;
@@ -41,7 +38,34 @@ export default class TodoList extends Component{
     }
 
     setEvent(){
-    //   const { editTodo, onEditMode, deleteTodo, toggleTodo } = this.$props;
+
+      const { onEditMode, editTodo, deleteTodo, toggleTodo } = this.$props;
+
+      // 수정 버튼 클릭
+      this.addEvent('click', '.modifier', (event) => {
+        const idx = event.target.dataset.idx;
+        onEditMode(idx);
+      });
+
+      // 수정 완료
+      this.addEvent('submit', 'form[name="modifierForm"]', editTodo);
+
+      // 수정 모드에서 Esc
+      this.addEvent('keyup', 'form[name="modifierForm"]', (event) => {
+        if(event.key !== 'Escape') return;
+        onEditMode();
+      });
+
+      // 수정 모드에서 취소 버튼 클릭
+      this.addEvent('click', '.cancelModifier', () => {
+        onEditMode();
+      });
+
+      // 삭제 버튼 클릭
+      this.addEvent('click', '.deleter', deleteTodo);
+
+      // 토글 체크박스 클릭
+      this.addEvent('click', '.toggle', toggleTodo);
 
     //   const $modifiers = this.$target.querySelectorAll('.modifier');
     //   $modifiers.forEach(($modifier) => {

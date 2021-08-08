@@ -10,22 +10,24 @@ export default class Component{
         this.setup();
         this.render();
         this.setEvent();
-        this.initChildren();
     }
 
     setup(){}
-
-    mounted(){}
-
-    initChildren(){}
-
+    
     template(){}
-
+    
     render(){
         this.$target.innerHTML = this.template();
         this.mounted();
     }
+    
+    mounted(){}
 
+    initChildren(selector, component, props){
+        const $elem = this.$target.querySelector(`${selector}`);
+        new component($elem, props);
+    }
+    
     setEvent(){}
 
     setState(newState){

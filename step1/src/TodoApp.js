@@ -3,6 +3,7 @@ import TodoList from './TodoList.js';
 import TodoAppender from './TodoAppender.js';
 
 class TodoApp extends Component{
+
     setup(){
         this.$state = {
             todoItems: [
@@ -13,6 +14,7 @@ class TodoApp extends Component{
               selectedItem: -1
         }
     }
+
     template(){
         return `
             <h1>📃 TodoList</h1>
@@ -20,6 +22,7 @@ class TodoApp extends Component{
             <ul class="todo-list"></ul>
         `;
     }
+
     mounted(){
         const $todolist = this.$target.querySelector('.todo-list');
         const $todoAppender = this.$target.querySelector('.todo-appender');
@@ -62,6 +65,7 @@ class TodoApp extends Component{
         const newState = this.$state;
         newState.todoItems[newState.selectedItem].content = content;
         newState.selectedItem = -1;
+        console.dir(this.$state);
         this.setState(newState);
     }
 
@@ -82,9 +86,9 @@ class TodoApp extends Component{
     toggleTodo(keyNum){
         const { todoItems } = this.$state;
         todoItems[keyNum].isComplete = !todoItems[keyNum].isComplete;
+        console.log(this.$state);
         this.setState({ todoItems });
     }
-
 
 }
 
