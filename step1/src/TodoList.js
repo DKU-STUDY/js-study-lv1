@@ -1,6 +1,7 @@
 import Component from './Component.js';
 
-export default class TodoList extends Component{  
+export default class TodoList extends Component{
+
     template(){
         const { todoItems, selectedItem } = this.$props.todoList;
         
@@ -75,5 +76,7 @@ export default class TodoList extends Component{
           toggleTodo(keyNum);
         });
       });
+
     }
+    
 }
