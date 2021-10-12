@@ -1,5 +1,19 @@
 # js-study-lv1
 
+## 목적
+
+1. javascript에 대해 이해하기
+2. 웹 브라우저에 대해 이해하기
+3. 웹 서버에 대해 이해하기
+4. 배포하기
+
+## 스터디 과정
+
+- [1주차: 웹에 대한 기본이론 + Todo List 만들기](./step1)
+- [2주차: Webpack + TodoList 리팩토링](./step2)
+- [3주차: node.js + express.js + REST API + ajax](./step3)
+- [4주차: 배포하기](./step4)
+
 ## 들어가기 전에
 
 ### Editor 혹은 IDE
@@ -76,11 +90,3 @@ $ git push https://github.com/DKU-STUDY/js-study-lv1 main
 
 - Github Pull Request에 대해 이해해야 합니다.
 - 이 [동영상](https://youtu.be/pR5SNFyzdg8)을 보면서 튜토리얼을 진행해주세요.
-
-## 스터디 과정 
-
-- [1주차: [워밍업] Todo List 만들기](./step1)
-- [2주차: Webpack + TodoList 리팩토링](./step2)
-- [3주차: ExpressJS로 API 서버 만들기](./step3)
-- [4주차: API 연동](./step4)
-- [5주차: 배포하기](./step5)

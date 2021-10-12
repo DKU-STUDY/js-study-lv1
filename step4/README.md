@@ -1,1 +1,17 @@
-# 4주차: API 연동
+# 4주차: 배포하기
+- [ ] 사전조사
+  - [ ] 클라우드 서비스에 대해 알아보기
+    - [ ] AWS
+    - [ ] Google Cloud Platform
+    - [ ] Azure
+    - [ ] Goorm (구름)
+    - [ ] NHN Toast
+    - [ ] Naver Cloud Platform
+  - [ ] 무료 플랫폼 조사
+    - [ ] Github Page에 대해 알아보기
+    - [ ] Vercel에 대해 알아보기
+    - [ ] Heroku에 대해 알아보기
+    - [ ] netlify에 대해 알아보기
+- [ ] 배포하기
+  - [ ] 원하는 시스템 선택해서 배포해보기
+  - 개인적으로 추천하는 것은 Heroku (무료)
