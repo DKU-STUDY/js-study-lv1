@@ -2,6 +2,7 @@ import data, { BUTTON } from '../src/data/index.js';
 import { KEY } from './common/consts.js';
 const $addItem = document.querySelector('[data-add-item]');
 const $addItemInput = document.querySelector('[data-add-item] input');
+const $todoList = document.querySelector('[data-todo-list]');
 
 const getParentElAndItemByEvent = (event, $parentSelector) => {
   const $parent = event.target.closest($parentSelector);
@@ -24,13 +25,15 @@ const handleAddItem = (event) => {
     console.dir(e);
   }
 };
-$addItem.addEventListener('submit', handleAddItem);
 
-const $todoList = document.querySelector('[data-todo-list]');
 const handleUpdateCompleteButton = (buttonType, item, $parent) => {
-  if (buttonType === BUTTON.UPDATE_COMPLETE) {
+  return (buttonType === BUTTON.UPDATE_COMPLETE) &&
     item.setName($parent.querySelector('[data-update-item]').value);
-  }
+}
+
+const handleDeleteButton = (buttonType, item) => {
+  return (buttonType === BUTTON.DELETE) &&
+    data.items.delete(item);
 }
 
 const handleButton = (event) => {
@@ -42,17 +45,23 @@ const handleButton = (event) => {
 
   const { $parent, item } = getParentElAndItemByEvent(event, 'li');
   handleUpdateCompleteButton(buttonType, item, $parent);
+  if (handleDeleteButton(buttonType, item)) {
+    return;
+  }
+
   item.setState(buttonType);
 };
 
-$todoList.addEventListener('keydown', (event) => {
+const handleUpdateEscape = (event) => {
   const { key } = event;
   if (event.target.dataset.updateItem !== undefined && key === KEY.ESCAPE) {
     const { item } = getParentElAndItemByEvent(event, 'li');
     item.setState(BUTTON.UPDATE_CANCEL);
   }
-})
+};
 
+$addItem.addEventListener('submit', handleAddItem);
+$todoList.addEventListener('keydown', handleUpdateEscape);
 $todoList.addEventListener('click', handleButton);
 
 

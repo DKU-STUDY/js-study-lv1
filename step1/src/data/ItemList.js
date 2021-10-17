@@ -27,4 +27,10 @@ export default class ItemList {
     return item;
   }
 
+  delete(item) {
+    delete this.#items[item.getId()];
+    this.#observer.notify();
+    return true;
+  }
+
 }
