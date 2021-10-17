@@ -13,7 +13,7 @@ export default class ItemNormalEl extends SuperItem {
       <p>
         ${this._item.getName()}
       </p>
-      <button type="button" data-button="${BUTTON.COMPLETE}">완료</button>
+      <input type="checkbox" data-button="${BUTTON.COMPLETE}"/>
       <button type="button" data-button="${BUTTON.UPDATE}">수정</button>
       <button type="button" data-button="${BUTTON.DELETE}">삭제</button>
     `;
