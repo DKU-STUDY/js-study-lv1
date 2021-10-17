@@ -1,7 +1,5 @@
 import ItemList from '../data/ItemList.js';
 import { invalidTypeError } from '../error.js';
-import ItemUpdateEl from './ItemUpdateEl.js';
-import ItemCompleteEl from './ItemCompleteEl.js';
 import El from '../core/El.js';
 
 export default class ItemListEl extends El {
@@ -16,7 +14,8 @@ export default class ItemListEl extends El {
   }
 
   render() {
-    this._$root.innerHTML = Object.entries(this.#itemList.use(this)).map(([key ,item]) => `<li>
+    this._$root.innerHTML = Object.entries(this.#itemList.use(this)).map(([key ,item]) => `
+      <li data-key="${item.getId()}">
       ${item.convertToEl().render()}
       </li>`).join('');
   }

@@ -2,7 +2,7 @@
  * 아이템의 기본 상태들
  */
 import SuperItem from './SuperItem.js';
-
+import { BUTTON } from '../data/index.js';
 export default class ItemNormalEl extends SuperItem {
   constructor({ item }) {
     super({item});
@@ -13,9 +13,9 @@ export default class ItemNormalEl extends SuperItem {
       <p>
         ${this._item.getName()}
       </p>
-      <button type="button">완료</button>
-      <button type="button">수정</button>
-      <button type="button">삭제</button>
+      <button type="button" data-button="${BUTTON.COMPLETE}">완료</button>
+      <button type="button" data-button="${BUTTON.UPDATE}">수정</button>
+      <button type="button" data-button="${BUTTON.DELETE}">삭제</button>
     `;
   }
 }

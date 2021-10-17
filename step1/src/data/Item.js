@@ -1,17 +1,17 @@
 import { isBlank } from '../utils/StringUtils.js';
 import { illegalArgumentsError } from '../error.js';
-import ItemCompleteEl from '../elements/ItemCompleteEl.js';
-import ItemUpdateEl from '../elements/ItemUpdateEl.js';
-import ItemNormalEl from '../elements/ItemNormalEl.js';
-const STATE = {
-  COMPLETE: ItemCompleteEl,
-  UPDATE: ItemUpdateEl,
-  NORMAL: ItemNormalEl,
-};
+import Observer from '../core/Observer.js';
+import { STATE } from './index.js';
 export default class Item {
   #id = null;
   #name = '';
   #state = STATE.NORMAL;
+
+  #observer = new Observer();
+  use(element) {
+    this.#observer.subscribe(element);
+    return this;
+  }
 
   constructor({ name, id }) {
     this.validate(name);
@@ -33,8 +33,30 @@ export default class Item {
     return this.#id;
   }
 
+  /**
+   * STATE 의 키 타입 이어야 한다.
+   * @param state
+   */
+  setState(state) {
+    const newState = STATE[state];
+    if (!newState) {
+      illegalArgumentsError(state);
+    }
+
+    this.#state = newState;
+    this.notify();
+  }
+
+  setName(name) {
+    this.#name = name;
+    this.notify();
+  }
+
+  notify() {
+    this.#observer.notify();
+  }
+
   convertToEl() {
     return new this.#state({ item: this });
   }
-
 }

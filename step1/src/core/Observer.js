@@ -1,8 +1,8 @@
 export default class Observer {
-  #subscribers = [];
+  #subscribers = new Set();
 
   subscribe(element) {
-    this.#subscribers.push(element);
+    this.#subscribers.add(element);
   }
 
   notify() {
