@@ -9,11 +9,12 @@
 function appendItem (event) {
   //고유 이벤트 제거
   event.preventDefault();
-    
-  console.log(event); //콘솔창에서 정보 보기
+  
+  //콘솔창에서 정보 보기
+  console.log(event); 
 
   //태그 선택
-  var $appender = $appenderForm.querySelector('input');
+  var $appender = $appenderForm.querySelector("input");
 
   //태그 생성
   var $newItem = document.createElement("li")
@@ -25,7 +26,7 @@ function appendItem (event) {
       ${$appender.value}
     </p>
     <button class="complete" type="button">완료</button>
-    <button type="button">수정</button>
+    <button class="update" type="button">수정</button>
     <button class="remove" type="button">삭제</button>
   `;
   $todoList.appendChild($newItem);
@@ -34,7 +35,7 @@ function appendItem (event) {
   //커서가 글로 가게끔
   $appender.focus();     
 
-  // 추가된 아이템의 삭제 버튼에 이벤트 등록
+  // 추가된 아이템의 버튼에 이벤트 등록
   $newItem.querySelector(".remove").onclick = removeItem;
   $newItem.querySelector(".complete").onclick = removeItem;
   $newItem.querySelector(".update").onclick = editItem;
