@@ -37,6 +37,8 @@ function appendItem (event) {
   // 추가된 아이템의 삭제 버튼에 이벤트 등록
   $newItem.querySelector(".remove").onclick = removeItem;
   $newItem.querySelector(".complete").onclick = removeItem;
+  $newItem.querySelector(".update").onclick = editItem;
+
 }
 
 //(2) 태그 삭제 함수
