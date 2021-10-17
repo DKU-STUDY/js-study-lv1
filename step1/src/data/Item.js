@@ -1,4 +1,4 @@
-import { isBlank } from '../utils/StringUtils.js';
+import { isBlank } from '../common/StringUtils.js';
 import { illegalArgumentsError } from '../error.js';
 import Observer from '../core/Observer.js';
 import { STATE } from './index.js';

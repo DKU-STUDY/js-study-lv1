@@ -1,6 +1,6 @@
 import Observer from '../core/Observer.js';
 import Item from './Item.js';
-import { uuidv4 } from '../utils/StringUtils.js';
+import { uuidv4 } from '../common/StringUtils.js';
 import { illegalArgumentsError } from '../error.js';
 
 export default class ItemList {
