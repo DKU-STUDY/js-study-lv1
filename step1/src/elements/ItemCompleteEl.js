@@ -15,8 +15,8 @@ export default class ItemCompleteEl extends SuperItem {
           ${this._item.getName()}
         </p>
         <input type="checkbox" data-button="${BUTTON.NORMAL}" checked />
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
+        <button type="button" data-button="${BUTTON.UPDATE}">수정</button>
+        <button type="button" data-button="${BUTTON.DELETE}">삭제</button>
     `;
   }
 }
