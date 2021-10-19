@@ -4,11 +4,11 @@
 // (1) 태그 추가 함수
 function appendItem (event) {
     
-    event.preventDefault(); // 이벤트 제거
+    event.preventDefault(); // handAppendItemButton
 
-    var $appender = $appenderForm.querySelector('input'); // 태그 선택
+    const $appender = $appenderForm.querySelector('input');
 
-    var $newItem = document.createElement('li'); // 태그 생성
+    const $newItem = document.createElement('li');
     
     // 태그에 내용 채우기
     if($appender.value){
@@ -23,13 +23,32 @@ function appendItem (event) {
         `;
         $todoList.appendChild($newItem);
         $appender.value = "";
-        //$appender.focus();
+        $appender.focus();
 
-    // 추가한 아이템의 삭제 버튼에 이벤트 등록
-    $newItem.querySelector('.remove').onclick = removeItem;
-    $newItem.querySelector('.complete').onclick = toggleItem;
-    $newItem.querySelector('.check').onclick = toggleItem;
-    $newItem.querySelector('.update').onclick = editItem;
+        // 추가한 아이템 버튼 이벤트 등록
+        /* document.addEventListener('click', newItemEvent);
+        function newItemEvent (event) {
+            switch (event.target.getAttribute("class")){
+                case "complete":
+                    toggleItem(event);
+                    break;
+                case "check":
+                    toggleItem(event);
+                    break;
+                case "update":
+                    editItem(event);
+                    break;
+                case "remove":
+                    removeItem(event);
+                    break;
+                default: break;
+            }
+        } */
+
+        $newItem.querySelector('.remove').onclick = removeItem;
+        $newItem.querySelector('.complete').onclick = toggleItem;
+        $newItem.querySelector('.check').onclick = toggleItem;
+        $newItem.querySelector('.update').onclick = editItem;
     }
     else{alert("아이템 이름을 입력해주세요.")};
 }
@@ -45,9 +64,10 @@ function removeItem (event) {
 function toggleItem (event) {
 
     const $content = event.target.parentNode.querySelector('p');
-    var completed = '';
-    var isChecked = null;
-    var $parent = event.target.parentNode;
+    const $parent = event.target.parentNode;
+    let completed = '';
+    let isChecked = null;
+    
 
     // 체크박스-버튼 동기화
     // 버튼 눌렀을 때
@@ -74,8 +94,9 @@ function toggleItem (event) {
 // (4) 아이템 수정 전환 함수
 function editItem (event) {
 
-    var $parent = event.target.parentNode;
-    var originHTML = $parent.innerHTML;
+    const $parent = event.target.parentNode;
+    const originHTML = $parent.innerHTML;
+    console.log(originHTML);
 
     $parent.innerHTML = `
         <form name="modifierForm" action="">
@@ -92,6 +113,7 @@ function editItem (event) {
     `;
 
     function registerEvent () {
+        
         $parent.querySelectorAll('.update').forEach(function($update){
             $update.onclick = editItem;
         })
@@ -111,16 +133,16 @@ function editItem (event) {
     // esc 누르면 취소
     document.addEventListener("keyup", pressESC);
     function pressESC (event) {
-        if (event.keyCode === 27){
+        if (event.key === "Escape"){
             $parent.innerHTML = originHTML;
-            registerEvent();
+           registerEvent();
         }
     }
 
-    var $editForm = $parent.querySelector('form');
+    const $editForm = $parent.querySelector('form');
     $editForm.onsubmit = function (event) {
         event.preventDefault();
-        var newContent = $editForm.querySelector('input').value;
+        const newContent = $editForm.querySelector('input').value;
         $parent.innerHTML = originHTML;
         $parent.querySelector('p').innerHTML = newContent;
         registerEvent();
@@ -130,8 +152,8 @@ function editItem (event) {
 
 
 /** 2. DOM 접근 **/ 
-var $appenderForm = document.forms.appenderForm;
-var $todoList = document.querySelector('#todoList');
+const $appenderForm = document.forms.appenderForm;
+const $todoList = document.querySelector('#todoList');
 
 
 
