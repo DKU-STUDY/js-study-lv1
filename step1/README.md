@@ -33,33 +33,54 @@ html문서의 프로그래밍 interface, DOM은 문서의 구조화된 표현을
 * [DOM/BOM참고](https://wickies.tistory.com/27?category=768089)   
 * [생활코딩 javascript](https://opentutorials.org/module/904/6622)
 
-- [ ] `CSS(Cascading Style Sheet)` 조사하기 (3문장 요약)
+- [x] `CSS(Cascading Style Sheet)` 조사하기 (3문장 요약)
 
 ```
 html이나 xml로 작성된 문서의 표시 방법을 기술하기 위한 스타일 시트언어
 웹페이지를 꾸미려고 작성하는 코드
 html 문서에 있는 요소들에 선택적으로 스타일을 적용할 수 있다는 말!
 ```
-- [ ] `Javascript` 조사하기 (3문장 요약)
+- [x] `Javascript` 조사하기 (3문장 요약)
 
 ```
+동적으로 컨텐츠를 바꾸고, 멀티미디어를 다루고, 움직이는 이미지 그리고 꽤나 많은 일을 할 수 있는 스크립트 언어
+클라이언트 단에서 웹 페이지가 동작하는 것을 담당한다
 ```
-- [ ] `ECMAScript` 조사하기 (3문장 요약)
+* [javascript란](https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+
+### 총정리
 
 ```
+HTML로는 웹의 내용을 작성하고, CSS로는 웹을 디자인하며, 자바스크립트로는 웹의 동작을 구현할 수 있습니다.
 ```
+
+- [x] `ECMAScript` 조사하기 (3문장 요약)
+
+```
+ECMAScript는 말 그대로 Ecma라는 기관이 만든 script 언어이며, ECMA-262 표준를 따르고 있다.
+javascript의 표준화를 위해 만들어진 것 
+자바 스크립트를 이루는 코어 스크립트! 웹 환경에서만 호스트 되는 언어가 아니다.
+```
+
 ### 이론 (2) - 형상관리 및 협업
-- [ ] `git` 에 대해 조사하기 (3문장 요약)
+- [x] `git` 에 대해 조사하기 (3문장 요약)
 
 ```
+버전 관리 시스템의 한 종류
+소프트웨어를 개발하는 소스코드를 효과적으로 관리할 수 있게 해주는 공개소프트웨어
+버전 관리 / 백업 / 협업을 위해 사용되어짐
 ```
-- [ ] `github` 에 대해 조사하기 (3문장 요약)
+- [x] `github` 에 대해 조사하기 (3문장 요약)
 
 ```
+분산 버전 컨트롤 소프트웨어 git을 기반으로 소스 코드를 호스팅 하고, 협업 지원 기능들을 지원하는 웹서비스
 ```
-- [ ] `github pull request` 에 대해 조사하기 (3문장 요약)
+- [x] `github pull request` 에 대해 조사하기 (3문장 요약)
 
 ```
+내가 수정한 코드가 있으니 내 branch를 가져가 검토 후 병합해주세요!
+코드 충돌을 최소화 할 수 있고 push 권한이 없는 오픈 소스 프로젝트에 기여할 때 많이 사용합니다.
+투박한 표현으로 "commit을 했습니다. master에 merge해도 될까요?" 라고 알리는 활동 
 ```
 ### 실습 (1) - git 사용 + 자기소개
 - [ ] 자기소개 페이지 만들기
