@@ -14,6 +14,11 @@
     button { background: #aaa; color: #FFF; border: none; height: 30px; width: 60px; border-radius: 3px; }
     main { width: 1000px; margin: 0 auto }
     fieldset { border: none; }
+    input[type="checkbox"] {
+        margin: 0 10px;
+        padding: 20px;
+        width: 20px;
+    }
 
     #app > h1 { text-align: center; padding: 20px 0;}
     #app > form { border: 1px solid #ddd; padding: 30px; }
@@ -25,64 +30,26 @@
 <body>
   <main id="app">
     <h1>📃 TodoList</h1>
-    <form name="appenderForm" action="" method="post">
+    <form name="appenderForm"
+          action=""
+          method="post"
+          data-add-item
+    >
       <fieldset>
         <legend hidden>TodoList Form</legend>
         <label>
           <span hidden>아이템 추가</span>
-          <input type="text" size="40" placeholder="Todo Item 내용을 입력해주세요">
+          <input
+            type="text"
+            size="40"
+            placeholder="Todo Item 내용을 입력해주세요"
+          >
         </label>
         <button type="submit">전송</button>
       </fieldset>
     </form>
-    <ul>
-      <!-- 완료된 아이템 -->
-      <li>
-        <p style="color: #09F">
-          1주차: Todo List 만들기
-        </p>
-        <button type="button">취소</button>
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
-      </li>
-      <!-- / 완료된 아이템 -->
-
-      <!-- 수정 중인 아이템 -->
-      <li>
-        <form name="modifierForm" action="">
-          <fieldset>
-            <legend hidden>아이템 수정</legend>
-            <label>
-              <span hidden>아이템 수정</span>
-              <input type="text" value="2주차: 번들러 조사 및 적용" size="40">
-            </label>
-            <button type="submit">완료</button>
-            <button type="button">취소</button>
-          </fieldset>
-        </form>
-      </li>
-      <!-- / 수정 중인 아이템 -->
-
-      <!-- 아이템의 기본 상태들 -->
-      <li>
-        <p>
-          3주차: node.js + express.js + REST API + ajax
-        </p>
-        <button type="button">완료</button>
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
-      </li>
-      <li>
-        <p>
-          4주차: 배포하기
-        </p>
-        <button type="button">완료</button>
-        <button type="button">수정</button>
-        <button type="button">삭제</button>
-      </li>
-      <!-- / 아이템의 기본 상태들 -->
-    </ul>
+    <ul data-todo-list/>
   </main>
-  <script src="./src/main.js" defer></script>
+  <script src="./src/main.js" defer type="module"></script>
 </body>
 </html>
