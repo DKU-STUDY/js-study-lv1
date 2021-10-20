@@ -139,14 +139,100 @@ ESM 모듈 내의 모든 자식 스크립트들은 병렬로 다운로드 되지
     
 > 워커 프로세스(Worker Process)는 클라이언트와 실제로 통신을 하며 사용자의 요구 사항을 처리하는 프로세스이다
 
-#### webpack
+### webpack vs rollup vs parcel
+#### Configuration
+Configuration을 이야기했을 때, 세 번들러중 가장 튀는 것은 Parcel입니다. 
+Parcel은 config파일을 가지고 있지 않습니다.
 
+Webpack도 config파일 없이 가능하지만, 
+옵션들을 사용하고자하면 config파일을 필요로합니다.
 
-#### rollup
+Rollup은 상대경로를 지원하지만, 
+Webpack은 지원하지 않습니다. 
+따라서 path.resolve , path.join 등을 사용합니다.
 
+#### Transformations
+Javascript이외의 파일을 처리하기 위해서는 Javascript 형식으로 파일을 변환한 후, 
+Bundler로 전달해야 합니다.
+
+Webpack에서는 babel-loader, css-loader와 같이 loader를 사용합니다.
+
+Rollup은 플러그인을 사용합니다.
+
+Parcel은 별도의 설정파일 없이 다양한 변환을 지원합니다.
+
+#### Tree Shaking
+Tree shaking을 통해 얼마나 Dead code를 지울 수 있는지는 아래의 사이트에서 확인하실 수 있습니다. 
+(https://github.com/mischnic/tree-shaking-example )
+
+주로 Pacel과 Rollup이 좋은 성과를 내는 것을 보실 수 있습니다. 각 번들러의 특징은 다음과 같습니다.
+
+Webpack은 Tree Shaking을 ES6 모듈에서만 지원을 합니다. 
+그리고 package.json 파일에 "sideEffects" 항목을 필요로합니다. 
+그리고 UglifyJS와 같은 minimize tool도 필요로합니다.
+
+Rollup은 기본적으로 코드를 정적으로 분석하고 실제로 사용하지 않는 것을 제외합니다. 
+기존도구와 모듈을 기반으로 빌드가 가능합니다.
+
+Parcel은 ES6모듈, CommonJS모듈 모두에서 Tree Shaking을 지원합니다. 
+CommonJS를 사용하는 코드에서 효과적입니다. 
+또한 대부분의 작업을 캐싱하여 다시 빌드할경우 빠른 속도를 보여줍니다.
+
+#### Dev Server
+Webpack은 webpack-dev-server 를 제공합니다. 이는 live-reload를 지원합니다.
+
+Rollup은 개발서버를 위해 rollup-plugin-serve 를 제공합니다. 
+live-reload를 위해서는 추가로 rollup-plugin-livereload 를 설치해야합니다.
+
+Parcel 에는 개발서버가 내장되어있고 파일을 변경할경우, 다시 빌드합니다.
+
+#### Hot Module Replacement
+Hot Module Replacement는 코드가 실행되는 동안 전체 리로드를 할 필요없이 모듈을 추가 제거할 수 있는 기능을 이야기합니다.
+
+Webpack은 webpack-dev-server 의 hot 모드를 통해 지원합니다.
+
+Rollup에서는 지원하지 않습니다.
+
+Parcel은 기본적으로 HMR을 지원합니다.
+
+### 결론
+Webpack, Rollup, Parcel 이 3가지 Bundler를 Bundler가 가지고 있는 기능들에 따라 비교를 해보았습니다.
+ 각 Bundler를 어느경우에 사용해야할지를 생각해보았을 때, 각각의 장점과 단점에 따라 다릅니다.
+
+저는 Webpack을 선호할 것 같습니다. 다양한 플러그인과 로더를 통해 개발자에게 광범위한 지원을 해주고 오랜기간 발전한만큼 사용법에 대한 레퍼런스가 많습니다.
+
+Parcel은 소규모로 Toy 프로젝트를 진행하거나 Bundler 설정에 많은 시간을 할애할 수 없는 경우 사용하는 것을 추천합니다.
+
+Rollup은 Tree Shaking과 같이 효율성을 고려하는 프로젝트에 추천합니다. 
+하지만 다른 번들러에서 쉽게했던 작업들을 위해 많은 플러그인을 필요로할 수 있습니다.
+
+파셀은 기본적으로 지원하는 설정들이 많다. 대신 웹팩은 커스텀의 자유도가 높다. 
 
 #### vite
+VITE는 네이티브 ES 모듈을 지원하는 웹 개발 툴입니다. Vue.js 3.0 이상과 동작하게 설계 되었고 번들 시에는 Rollup.js를 사용하여 프로덕션 빌드를 제공합니다. 
 
+빠른 콜드 서버 스타트
+
+번들링을 수행하지 않고 서버 콜드 스타트가 매우 빠릅니다.
+인스턴트 HMR (hot module replacement)
+
+vue.js 코드는 수정 후 저장하면 HMR 되면서 바로 변경된 사항을 볼 수 있습니다. VITE는 HMR할 때 변경된 모듈만 교체하므로 프로그램의 크기에 상관없이 HMR이 일관되게 빠릅니다.
+
+진정한 온-디맨드 방식
+
+코드는 온-디맨드 방식으로 컴파일 됩니다. 그래서 실제로 보여지는 현재 화면만 컴파일 됩니다. 전체 앱이 번들링될 때까지 기다릴 필요가 없어서 프로젝트의 크기가 클 경우 더 효과적인 방식입니다.
+
+Full Page Load 시에는 기존의 vue-cli 보다 느릴 수 있다.
+아직 CSS Preprocessor 의 HMR 을 지원하지 않는다.
+
+Vite는 번들과정이 없다고 말하는데 
+이는 Modern 브라우저에서 사용할 수 있는 Script Tag의 type=module을 사용함으로써 
+가능하다고 한다. 그러나 이는 IE와 같은 브라우저에서는 사용하지 못하여 
+추가적인 작업이 필요하게 된다.
+ 
+IE11 지원 관련해서 많은 이야기가 오고 갔다.
+결국 vite-plugin-legacy 를 사용하는 것이 해결방안으로, 
+한 개발자분이 해당 플러그인을 업데이트 해주시면서 끝이나는 듯했다.
 
 ### 번들러 적용
 - [ ] 번들러 설치를 위해 nodejs + npm 설치
@@ -164,3 +250,6 @@ ESM 모듈 내의 모든 자식 스크립트들은 병렬로 다운로드 되지
 - https://eyabc.github.io/docs/javascript/module/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%20%EB%AA%A8%EB%93%88
 - https://ko.parceljs.org/
 - https://technet.tmaxsoft.com/upload/download/online/tibero/pver-20150504-000001/tibero_admin/chapter_intro.html
+- https://sambalim.tistory.com/137
+- https://marrrang.tistory.com/10
+- https://snyung.com/content/2020-12-20--Preact%20Vite%20%EC%9D%BC%EC%A3%BC%EC%9D%BC%20%EC%82%AC%EC%9A%A9%ED%9B%84%EA%B8%B0
