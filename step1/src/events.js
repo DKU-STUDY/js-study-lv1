@@ -1,5 +1,5 @@
-import data, { BUTTON } from '../src/data/index.js';
-import { KEY } from './common/consts.js';
+import data from '../src/data/index.js';
+import { BUTTON, KEY } from './common/consts.js';
 const $addItem = document.querySelector('[data-add-item]');
 const $addItemInput = document.querySelector('[data-add-item] input');
 const $todoList = document.querySelector('[data-todo-list]');
@@ -28,7 +28,7 @@ const handleAddItem = (event) => {
 
 const handleUpdateCompleteButton = (buttonType, item, $parent) => {
   return (buttonType === BUTTON.UPDATE_COMPLETE) &&
-    item.setName($parent.querySelector('[data-update-item]').value);
+    (item.name = $parent.querySelector('[data-update-item]').value);
 }
 
 const handleDeleteButton = (buttonType, item) => {

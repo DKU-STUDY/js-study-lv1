@@ -2,20 +2,18 @@
  * 아이템의 기본 상태들
  */
 import SuperItem from './SuperItem.js';
-import { BUTTON } from '../data/index.js';
-export default class ItemNormalEl extends SuperItem {
-  constructor({ item }) {
-    super({item});
-  }
+import { BUTTON } from '../common/consts.js';
 
+const { COMPLETE, UPDATE, DELETE } = BUTTON;
+export default class ItemNormalEl extends SuperItem {
   render() {
     return `
       <p>
-        ${this._item.getName()}
+        ${this._item.name}
       </p>
-      <input type="checkbox" data-button="${BUTTON.COMPLETE}"/>
-      <button type="button" data-button="${BUTTON.UPDATE}">수정</button>
-      <button type="button" data-button="${BUTTON.DELETE}">삭제</button>
+      <input type="checkbox" data-button="${COMPLETE}"/>
+      <button type="button" data-button="${UPDATE}">수정</button>
+      <button type="button" data-button="${DELETE}">삭제</button>
     `;
   }
 }
