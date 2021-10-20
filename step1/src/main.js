@@ -32,15 +32,9 @@ $doneBtns.forEach(function ($doneBtn){
 
 //이벤트 추가 함수
 function register($parent) { // 한 번 밖에 작동 안됨!!!
-    $parent.querySelectorAll('.complete').forEach(function ($complete){
-        $complete.addEventListener('click', complete);
-    });
-    $parent.querySelectorAll('.cancel').forEach(function ($cancel){
-        $cancel.addEventListener('click', cancel);
-    });
-    $parent.querySelectorAll('.done').forEach(function ($done){
-        $done.addEventListener('click', done);
-    });
+    $parent.querySelector('.complete').addEventListener('click', complete);
+    $parent.querySelector('.cancel').addEventListener('click', cancel);
+    $parent.querySelector('.done').addEventListener('click', done);
 }
 
 /** 이벤트 함수 **/
