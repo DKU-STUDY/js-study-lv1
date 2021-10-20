@@ -4,7 +4,7 @@ export const isBlank = (str) => {
   }
 
   if (typeof str !== 'string') {
-    throw new Error("not a string!");
+    return false;
   }
 
   return !str.trim();
