@@ -15,7 +15,7 @@ export default class ItemListEl extends El {
 
   render() {
     this._$root.innerHTML = Object.entries(this.#itemList.use(this)).map(([key ,item]) => `
-      <li data-key="${item.getId()}">
+      <li data-key="${item.id}">
       ${item.convertToEl().render()}
       </li>`).join('');
   }

@@ -1,9 +1,9 @@
-export const _curryr = (fn) => function(a, b) {
-  return arguments.length === 2 ? fn(a, b) : (b) => fn(b, a)
+export const _curryr = (fn) => (...args) => {
+  return args.length === 2 ? fn(args) : (b) => fn(b, args[0])
 };
 
-export const _is_object = (obj) => typeof obj == 'object' && !!obj;
-export const _keys = (obj) => _is_object(obj) ? Object.keys(obj) : [];
+export const _isObject = (obj) => typeof obj == 'object' && !!obj;
+export const _keys = (obj) => _isObject(obj) ? Object.keys(obj) : [];
 
 export const _each = _curryr((list, iter) => {
   const keys = _keys(list);

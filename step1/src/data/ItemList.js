@@ -28,7 +28,7 @@ export default class ItemList {
   }
 
   delete(item) {
-    delete this.#items[item.getId()];
+    delete this.#items[item.id];
     this.#observer.notify();
     return true;
   }
