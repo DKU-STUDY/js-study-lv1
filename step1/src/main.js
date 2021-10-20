@@ -28,20 +28,21 @@ $completeBtns.forEach(function ($completeBtn) {
 });
 $doneBtns.forEach(function ($doneBtn){
     $doneBtn.addEventListener('click', done);
-})
+});
 
 //이벤트 추가 함수
-function register($parent) { // 한 번 밖에 작동 안됨!!!
-    $parent.querySelectorAll('.complete').forEach(function ($complete){
-        $complete.addEventListener('click', complete);
-    });
-    $parent.querySelectorAll('.cancel').forEach(function ($cancel){
-        $cancel.addEventListener('click', cancel);
-    });
-    $parent.querySelectorAll('.done').forEach(function ($done){
-        $done.addEventListener('click', done);
-    });
-}
+// function register($parent) { // 한 번 밖에 작동 안됨!!!
+//     $parent.querySelector('.complete').addEventListener('click', complete);
+    
+//     $parent.querySelector('.cancel').addEventListener('click', cancel);
+
+//     $parent.querySelector('.done').addEventListener('click', done);
+   
+//     $parent.querySelector('.edit').addEventListener('click', edit);
+
+//     $parent.querySelector('.remove').addEventListener('click', remove);
+
+// }
 
 /** 이벤트 함수 **/
 function done(e){
@@ -54,24 +55,32 @@ function done(e){
         '<button class="edit" type="button">수정</bytton>' +
         '<button class="remove" type="button">삭제</bytton>';
     $parent.innerHTML = content;
-    register($parent);
+    $parent.querySelector('.complete').addEventListener('click', complete);
+    $parent.querySelector('.edit').addEventListener('click', edit);
+    $parent.querySelector('.remove').addEventListener('click', remove);
+
+
 }
 
 function complete(e) {
     $parent = e.target.parentNode;
     $node = $parent.querySelector('.complete');
-    $parent.querySelector('p').style.color = '#09F'; //색 변환
-    $node.innerHTML = '취소';
+    $parent.querySelector('p').style.color = '#09F'; //색 변환 //-> 완료/취소 일 경우 p가 없어서 안되는 듯
+    $node.innerText = '취소';
     $node.className = 'cancel';
-    register($parent);
+    $node.removeEventListener('click', complete);   //removeEventListener 삽입해서 해결 !
+    $node.addEventListener('click', cancel);
 }
 
 function cancel(e) {
     $parent = e.target.parentNode;
+    $node = $parent.querySelector('.cancel');
     $parent.querySelector('p').style.color = '#000000'; //색 변환
-    $parent.querySelector('.cancel').innerHTML = '완료';
-    $parent.querySelector('.cancel').className = 'complete';
-    register($parent);
+    $node.innerText = '완료';
+    $node.className = 'complete';
+    $node.removeEventListener('click', cancel);
+    $node.addEventListener('click', complete);
+    
 }
 
 function edit(e) {
