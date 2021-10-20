@@ -1,3 +1,5 @@
+import { overrideSuperClassError } from '../error.js';
+
 export default class El {
   _$root;
   constructor({ $root} = {}) {
@@ -5,6 +7,6 @@ export default class El {
   }
 
   render() {
-    throw 'override render!';
+    overrideSuperClassError('El');
   }
 }
