@@ -1,12 +1,12 @@
-import El from './El.js';
 import { illegalArgumentsError } from '../error.js';
+import Subscriber from './Subscriber.js';
 
 export default class Observer {
   #subscribers = new Set();
 
-  subscribe(element) {
-    element instanceof El && illegalArgumentsError(element);
-    this.#subscribers.add(element);
+  subscribe(subscriber) {
+    subscriber instanceof Subscriber && illegalArgumentsError(subscriber);
+    this.#subscribers.add(subscriber);
   }
 
   notify() {
