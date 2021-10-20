@@ -10,6 +10,7 @@ var $editBtns = $itemList.querySelectorAll('.edit');
 var $cancelBtns = $itemList.querySelectorAll('.cancel');
 var $completeBtns = $itemList.querySelectorAll('.complete');
 var $doneBtns = $itemList.querySelectorAll('.done');
+var $revokeBtn = $itemList.querySelector('.revoke');
 
 /** 이벤트 리스너**/
 $appender.addEventListener('submit', send);
@@ -29,7 +30,6 @@ $completeBtns.forEach(function ($completeBtn) {
 $doneBtns.forEach(function ($doneBtn){
     $doneBtn.addEventListener('click', done);
 });
-
 //이벤트 추가 함수
 // function register($parent) { // 한 번 밖에 작동 안됨!!!
 //     $parent.querySelector('.complete').addEventListener('click', complete);
@@ -45,6 +45,8 @@ $doneBtns.forEach(function ($doneBtn){
 // }
 
 /** 이벤트 함수 **/
+
+
 function done(e){
     e.preventDefault();
     $parent = e.target.parentNode.parentNode.parentNode;
@@ -85,22 +87,33 @@ function cancel(e) {
 
 function edit(e) {
     $parent = e.target.parentNode;
-    $insertContent = $parent.querySelector('p').innerHTML.trim();
+    $originHTML = $parent.innerHTML;
+    insertContent = $parent.querySelector('p').innerText;
     var content =
         '<form name="modifierForm" action="">' +
         '<fieldset>' +
         '<legend hidden>아이템 수정</legend>' +
         '<label>' +
         '<span hidden> 아이템 수정 </span>' +
-        '<input type="text" value="' + $insertContent + '" size="40">' +
+        '<input type="text" value="' + insertContent + '" size="40">' +
         '</label>' +
         '<button class ="done" type="submit">완료</button>' +
-        '<button class="cancel" type="button">취소</bytton>' +
+        '<button class="revoke" type="button">취소</bytton>' +
         '</fieldset>' +
         '</form>';
     $parent.innerHTML = content;
 
-    register($parent);
+    $parent.querySelector('.done').addEventListener('click', done);
+    $parent.querySelector('.revoke').addEventListener('click', revoke);
+
+    function revoke(e){
+        e.preventDefault();
+        $parent.innerHTML = $originHTML;
+        
+        $parent.querySelector('.complete').addEventListener('click', complete);
+        $parent.querySelector('.edit').addEventListener('click', edit);
+        $parent.querySelector('.remove').addEventListener('click', remove);
+    }
 }
 
 function remove(e) {
