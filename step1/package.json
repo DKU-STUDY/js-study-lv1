@@ -5,7 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open",
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +16,15 @@
   "devDependencies": {
     "css-loader": "^6.4.0",
     "csv-loader": "^3.0.3",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^5.4.0",
     "json5": "^2.2.0",
     "style-loader": "^3.3.1",
     "toml": "^3.0.0",
     "webpack": "^5.59.1",
     "webpack-cli": "^4.9.1",
+    "webpack-dev-middleware": "^5.2.1",
+    "webpack-dev-server": "^4.3.1",
     "xml-loader": "^1.2.1",
     "yamljs": "^0.3.0"
   }
