@@ -9,6 +9,11 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  resolve: {
+    alias: {
+      Static: path.resolve(__dirname, 'src/static'),
+    }
+  },
   module: {
     rules: [
       {
