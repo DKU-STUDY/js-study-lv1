@@ -3,13 +3,12 @@ const toml = require('toml');
 const yaml = require('yamljs');
 const json5 = require('json5');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   mode: 'development',
   entry: {
     app: './src/index.js',
-    print: './src/print.js',
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -17,11 +16,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
+      title: 'Caching',
     }),
+    new BundleAnalyzerPlugin()
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     publicPath: '/',
@@ -75,5 +75,20 @@ module.exports = {
         }
       }
     ],
+  },
+  optimization: {
+    moduleIds: 'deterministic',
+    //  런타임 코드를 별도의 청크로 분할하는 최적화 기능, BundleAnalyzerPlugin 의 view 도 달라진다.
+    runtimeChunk: 'single',
+    // lodash 또는 react와 같은 타사 라이브러리는 로컬 소스 코드보다 변경 될 가능성이 적기 때문에 별도의 vendor 청크로 추출하는 것도 좋은 방법입니다. 이 단계를 통해 클라이언트는 최신 상태를 유지하기 위해 서버에 더 적은 요청을 할 수 있습니다.
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        }
+      }
+    }
   }
 }

@@ -9,8 +9,7 @@ import Notes from 'Static/data.csv';
 import toml from 'Static/data.toml';
 import yaml from 'Static/data.yaml';
 import json from 'Static/data.json5';
-
-import printMe from './print.js';
+import Print from './print';
 
 const $body = document.querySelector('body');
 
@@ -68,10 +67,10 @@ execute();
   console.log(json.owner.name);
 })();
 
-(function testMultiBundle() {
+(async function testMultiBundle() {
   const btn = document.createElement('button');
   btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
+  btn.onclick = Print.bind(null, 'Hello webpack!');
   $body.appendChild(btn);
 })();
 

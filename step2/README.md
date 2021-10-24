@@ -234,9 +234,13 @@ IE11 지원 관련해서 많은 이야기가 오고 갔다.
 결국 vite-plugin-legacy 를 사용하는 것이 해결방안으로, 
 한 개발자분이 해당 플러그인을 업데이트 해주시면서 끝이나는 듯했다.
 
+### prefetch, preload, preconnect
+https://beomy.github.io/tech/browser/preload-preconnect-prefetch/
+
 ### 번들러 적용
 - [x] 번들러 설치를 위해 nodejs + npm 설치
 - [ ] Parcel, Webpack, Rollup, Vite 중 택 1
+
 
 ## 번들러 관련 자료
 - [모듈화의 역사](https://medium.com/@chullino/%EC%9B%B9%ED%8C%A9-3-4-js%EB%AA%A8%EB%93%88%ED%99%94-%EC%97%AD%EC%82%AC-%EB%8F%8C%EC%95%84%EB%B3%B4%EA%B8%B0-1-9df997f82002)
@@ -253,3 +257,4 @@ IE11 지원 관련해서 많은 이야기가 오고 갔다.
 - https://sambalim.tistory.com/137
 - https://marrrang.tistory.com/10
 - https://snyung.com/content/2020-12-20--Preact%20Vite%20%EC%9D%BC%EC%A3%BC%EC%9D%BC%20%EC%82%AC%EC%9A%A9%ED%9B%84%EA%B8%B0
+
