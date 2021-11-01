@@ -1,3 +1,13 @@
 export const KEY = {
   ESCAPE: 'Escape'
 };
+
+export const BUTTON = {
+  COMPLETE: 'COMPLETE',
+  UPDATE: 'UPDATE',
+  NORMAL: 'NORMAL',
+  DELETE: 'DELETE',
+  UPDATE_COMPLETE: 'UPDATE_COMPLETE',
+  UPDATE_CANCEL: 'UPDATE_CANCEL',
+}
+

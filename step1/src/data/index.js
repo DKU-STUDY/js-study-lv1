@@ -2,17 +2,9 @@ import ItemList from './ItemList.js';
 import ItemCompleteEl from '../elements/ItemCompleteEl.js';
 import ItemUpdateEl from '../elements/ItemUpdateEl.js';
 import ItemNormalEl from '../elements/ItemNormalEl.js';
+import { BUTTON } from '../common/consts.js';
 
-export const BUTTON = {
-  COMPLETE: 'COMPLETE',
-  UPDATE: 'UPDATE',
-  NORMAL: 'NORMAL',
-  DELETE: 'DELETE',
-  UPDATE_COMPLETE: 'UPDATE_COMPLETE',
-  UPDATE_CANCEL: 'UPDATE_CANCEL',
-}
-
-export const STATE = {
+export const STATE_AND_El = {
   [BUTTON.COMPLETE]: ItemCompleteEl,
   [BUTTON.UPDATE]: ItemUpdateEl,
   [BUTTON.NORMAL]: ItemNormalEl,
