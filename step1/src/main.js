@@ -26,25 +26,6 @@ function appendItem (event) {
         $appender.focus();
 
         // 추가한 아이템 버튼 이벤트 등록
-        /* document.addEventListener('click', newItemEvent);
-        function newItemEvent (event) {
-            switch (event.target.getAttribute("class")){
-                case "complete":
-                    toggleItem(event);
-                    break;
-                case "check":
-                    toggleItem(event);
-                    break;
-                case "update":
-                    editItem(event);
-                    break;
-                case "remove":
-                    removeItem(event);
-                    break;
-                default: break;
-            }
-        } */
-
         $newItem.querySelector('.remove').onclick = removeItem;
         $newItem.querySelector('.complete').onclick = toggleItem;
         $newItem.querySelector('.check').onclick = toggleItem;
@@ -65,8 +46,8 @@ function toggleItem (event) {
 
     const $content = event.target.parentNode.querySelector('p');
     const $parent = event.target.parentNode;
-    let completed = '';
-    let isChecked = null;
+    let completed;
+    let isChecked;
     
 
     // 체크박스-버튼 동기화
@@ -74,7 +55,7 @@ function toggleItem (event) {
     if(event.target.getAttribute('type') === "button"){
         completed = event.target.innerHTML === '취소';
         
-        isChecked = completed ? false : true; 
+        isChecked = !completed;
         $content.style.color = completed ? '' : '#09F';
         event.target.innerHTML = completed ? '완료' : '취소';
         $parent.querySelector('.check').checked = isChecked;
@@ -82,12 +63,11 @@ function toggleItem (event) {
     // 체크박스 눌렀을 때
     else {
         isChecked = event.target.checked === false;
-        completed = isChecked ? true : false;
+        completed = isChecked;
         $content.style.color = completed ? '' : '#09F';
 
         $parent.querySelector('.complete').innerHTML = completed ? '완료' : '취소';
     }
-    
 }
 
 
@@ -96,7 +76,7 @@ function editItem (event) {
 
     const $parent = event.target.parentNode;
     const originHTML = $parent.innerHTML;
-    console.log(originHTML);
+    const saveChecked = $parent.querySelector(".check").checked;
 
     $parent.innerHTML = `
         <form name="modifierForm" action="">
@@ -113,38 +93,33 @@ function editItem (event) {
     `;
 
     function registerEvent () {
-        
-        $parent.querySelectorAll('.update').forEach(function($update){
-            $update.onclick = editItem;
-        })
-        $parent.querySelectorAll('.remove').forEach(function($remove){
-            $remove.onclick = removeItem;
-        })
-        $parent.querySelectorAll('.complete').forEach(function($complete){
-            $complete.onclick = toggleItem;
-        })
+        $parent.querySelector('.complete').onclick = toggleItem;
+        $parent.querySelector('.check').onclick = toggleItem;
+        $parent.querySelector('.update').onclick = editItem;
+        $parent.querySelector('.remove').onclick = removeItem;
     }
-
-    $parent.querySelector('.cancel').onclick = function () {
-        $parent.innerHTML = originHTML;
-        registerEvent();
-    }
-
-    // esc 누르면 취소
-    document.addEventListener("keyup", pressESC);
     function pressESC (event) {
         if (event.key === "Escape"){
             $parent.innerHTML = originHTML;
-           registerEvent();
+            $parent.querySelector('.check').checked = saveChecked;
+            registerEvent();    
         }
     }
+    
+    $parent.querySelector('.cancel').onclick = function () {
+        $parent.innerHTML = originHTML;
+        $parent.querySelector('.check').checked = saveChecked;
+        registerEvent();
+    }
+    $parent.addEventListener("keyup", pressESC);
 
     const $editForm = $parent.querySelector('form');
     $editForm.onsubmit = function (event) {
         event.preventDefault();
-        const newContent = $editForm.querySelector('input').value;
+        const newContent = $parent.querySelector('input').value;
         $parent.innerHTML = originHTML;
         $parent.querySelector('p').innerHTML = newContent;
+        $parent.querySelector('.check').checked = saveChecked;
         registerEvent();
     }
 
