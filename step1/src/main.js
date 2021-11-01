@@ -2,47 +2,24 @@
 
 
 /** DOM 객체 **/
-var $appender = document.querySelector('form[name="appenderForm"]');
+const $appender = document.querySelector('form[name="appenderForm"]');
 //querySelectorAll로 받았을 경우 forEach를 통해 각각 이벤트 리스너 부여해야함!
-var $itemList = document.querySelector('#itemList'); //ul
-var $removeBtns = $itemList.querySelectorAll('.remove');
-var $editBtns = $itemList.querySelectorAll('.edit');
-var $cancelBtns = $itemList.querySelectorAll('.cancel');
-var $completeBtns = $itemList.querySelectorAll('.complete');
-var $doneBtns = $itemList.querySelectorAll('.done');
-var $revokeBtn = $itemList.querySelector('.revoke');
+const $itemList = document.querySelector('#itemList'); //ul
+const $removeBtns = $itemList.querySelectorAll('.remove');
+const $editBtns = $itemList.querySelectorAll('.edit');
+const $cancelBtns = $itemList.querySelectorAll('.cancel');
+const $completeBtns = $itemList.querySelectorAll('.complete');
+const $doneBtns = $itemList.querySelectorAll('.done');
+const $revokeBtn = $itemList.querySelector('.revoke');
 
 /** 이벤트 리스너**/
 $appender.addEventListener('submit', send);
-$removeBtns.forEach(function ($removeBtn) {
-        $removeBtn.addEventListener('click', remove);
-    }
-);
-$editBtns.forEach(function ($editBtn) {
-    $editBtn.addEventListener('click', edit);
-});
-$cancelBtns.forEach(function ($cancelBtn) {
-    $cancelBtn.addEventListener('click', cancel);
-});
-$completeBtns.forEach(function ($completeBtn) {
-    $completeBtn.addEventListener('click', complete);
-});
-$doneBtns.forEach(function ($doneBtn){
-    $doneBtn.addEventListener('click', done);
-});
-//이벤트 추가 함수
-// function register($parent) { // 한 번 밖에 작동 안됨!!!
-//     $parent.querySelector('.complete').addEventListener('click', complete);
-    
-//     $parent.querySelector('.cancel').addEventListener('click', cancel);
+$removeBtns.forEach($removeBtn => $removeBtn.addEventListener('click', remove));
+$editBtns.forEach($editBtn=> $editBtn.addEventListener('click', edit));
+$cancelBtns.forEach($cancelBtn=> $cancelBtn.addEventListener('click', cancel));
+$completeBtns.forEach($completeBtn=> $completeBtn.addEventListener('click', complete));
+$doneBtns.forEach($doneBtn=>$doneBtn.addEventListener('click', done));
 
-//     $parent.querySelector('.done').addEventListener('click', done);
-   
-//     $parent.querySelector('.edit').addEventListener('click', edit);
-
-//     $parent.querySelector('.remove').addEventListener('click', remove);
-
-// }
 
 /** 이벤트 함수 **/
 
@@ -52,10 +29,10 @@ function done(e){
     $parent = e.target.parentNode.parentNode.parentNode;
     var txt = $parent.querySelector('input').value;
     var content =
-        '<p style = "#000000">' + txt +'</p>' +
-        '<button class="complete" type="button">완료</bytton>' +
-        '<button class="edit" type="button">수정</bytton>' +
-        '<button class="remove" type="button">삭제</bytton>';
+      ` <p style = "#000000">${txt}</p>
+        <button class="complete" type="button">완료</bytton>
+        <button class="edit" type="button">수정</bytton>
+        <button class="remove" type="button">삭제</bytton>`;
     $parent.innerHTML = content;
     $parent.querySelector('.complete').addEventListener('click', complete);
     $parent.querySelector('.edit').addEventListener('click', edit);
@@ -90,17 +67,17 @@ function edit(e) {
     $originHTML = $parent.innerHTML;
     insertContent = $parent.querySelector('p').innerText;
     var content =
-        '<form name="modifierForm" action="">' +
-        '<fieldset>' +
-        '<legend hidden>아이템 수정</legend>' +
-        '<label>' +
-        '<span hidden> 아이템 수정 </span>' +
-        '<input type="text" value="' + insertContent + '" size="40">' +
-        '</label>' +
-        '<button class ="done" type="submit">완료</button>' +
-        '<button class="revoke" type="button">취소</bytton>' +
-        '</fieldset>' +
-        '</form>';
+        `<form name="modifierForm" action="">
+        <fieldset>
+        <legend hidden>아이템 수정</legend>
+        <label>
+        <span hidden> 아이템 수정 </span>
+        <input type="text" value="${insertContent}" size="40">
+        </label>
+        <button class ="done" type="submit">완료</button>
+        <button class="revoke" type="button">취소</bytton>
+        </fieldset>
+        </form>`;
     $parent.innerHTML = content;
 
     $parent.querySelector('.done').addEventListener('click', done);
@@ -129,12 +106,11 @@ function send(e) {
     // li append하기
     var $list = document.createElement('li');
     //li 디테일 삽입
-    $list.innerHTML = '<p style="color: #000000">\n' +
-                 txt +
-        '        </p>\n' +
-        '        <button class="complete" type="button">완료</button>\n' +
-        '        <button class="edit" type="button">수정</button>\n' +
-        '        <button class="remove" type="button">삭제</button>';
+    $list.innerHTML =
+                `<p style="color: #000000">${txt}</p>
+                <button class="complete" type="button">완료</button>
+                <button class="edit" type="button">수정</button>
+                <button class="remove" type="button">삭제</button>`;
     // li를 ul에 append
     $itemList.append($list);
     // 새로 생긴 list에 이벤트 리스너 따로 생성해줘야하는듯
