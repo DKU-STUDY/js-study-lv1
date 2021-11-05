@@ -26,8 +26,15 @@
     - URI : Uniform Resource Identifier. 자원을 식별하기 위한 문자열 구성. URL보다 더 넓은 개념임.
     - CRUD : Create, Read, Update, Delete.
    - `REST`의 특성으로 '일관적인 인터페이스', '무상태성', '캐시 가능', '서버-클라이언트 구조', '자체 표현', '계층 구조'가 있음.
-   - `REST API` : `REST`에 기반해 만들어진 API.
-   - `REST` 방식을 따르는 시스템을 `RESTful`하다고 함. 'REST스러운' 정도로 생각하면 될 것 같다.
+   - `REST API` : `REST`에 기반으로 만들어진 API.
+   - `REST API`를 사용한 서버를 `RESTful`하다고 함. 'REST스러운' 정도로 생각하면 될 것 같다.
+
+   - HTTP 요청 메서드
+    1. GET : 서버의 자원을 조회할 때
+    2. POST : 서버에 자원으로 새로 등록할 때
+    3. PUT : 서버의 자원을 대체(치환)할 때
+    4. PATCH : 서버의 자원을 일부 수정할 때
+    5. DELETE : 서버의 자원을 삭제 할 때
 
   - [x] AJAX란?
    - Asynchronous JavaScript And XML.
