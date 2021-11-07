@@ -66,19 +66,50 @@ function toggleItem(e) {
 function editItem(e) {
   const $parent = selectParent(e);
   const originHTML = $parent.innerHTML;
-  const originText = selectOne($parent, 'p').innerText;
+  const originContent = selectOne($parent, 'p').innerText;
+  const isChecked = selectOne($parent, '.check').checked;
   $parent.innerHTML = `
   <form id=edit-form action="" method="post">
     <fieldset>
       <legend hidden>아이템 수정</legend>
       <label>
         <span hidden>아이템 수정</span>
-        <input type="text" value="${originText}">
+        <input type="text" value="${originContent}">
       </label>
     <button type="submit" >완료</button>
-    <button class="cancle">취소</cancle>
+    <button class="cancle" type="button">취소</cancle>
   </form>
   `;
+  const $editForm = selectOne($parent, '#edit-form');
+  const $editInput = selectOne($parent, 'input');
+  console.log($editInput);
+
+  const completeEdit = e => {
+    e.preventDefault();
+    const newContent = $editInput.value;
+    $parent.innerHTML = originHTML;
+    selectOne($parent, 'p').innerText = newContent;
+    selectOne($parent, '.check').checked = isChecked;
+    registerEvent();
+  };
+  
+  const cancleEdit = e => {
+    $parent.innerHTML = originHTML;
+    selectOne($parent, '.check').checked = isChecked;
+    registerEvent();
+  };
+
+  const pressESC = e => {
+    if (e.key === "Escape") {
+      $parent.innerHTML = originHTML;
+      selectOne($parent, '.check').checked = isChecked;
+      registerEvent();
+    }
+  };
+
+  $editForm.addEventListener('submit', completeEdit);
+  selectOne($parent, '.cancle').addEventListener('click', cancleEdit);
+  $parent.addEventListener('keyup', pressESC);
 };
 
 function removeItem(e) {
@@ -86,9 +117,4 @@ function removeItem(e) {
   $parent.remove();
 };
 
-function completeEdit(e) {console.log('complete')};
-function cancleEdit(e) {
-  e.preventDefault();
-  const $parent = selectParent(e);
-  $parent.innerHTML = originHTML;
-};
+
