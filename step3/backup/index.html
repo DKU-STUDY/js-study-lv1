@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/style.css">
+  <title>Todo-List</title>
+</head>
+<body>
+  <main id="app">
+    <h1>Todo List</h1>
+    <form id="appenderForm" action="" method="post">
+      <fieldset>
+        <legend hidden>Todo-list appender form</legend>
+        <label hidden>아이템 추가</label>
+        <input required type="text" placeholder="내용을 입력해주세요.">
+        <button type="submit">생성</button>
+      </fieldset>
+    </form>
+    <ul id="todoList"></ul>
+  </main>
+  <script src="build/bundle.js"></script>
+</body>
+</html>
