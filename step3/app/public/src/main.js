@@ -8,26 +8,36 @@ const $appenderInput = selectOne($appenderForm, 'input')
 const $todoList = selectOne(document, '#todo-list');
 
 $appenderForm.addEventListener('submit', handleSubmitBtn);
+loadFromServer();
 
+// function
 function handleSubmitBtn(e) {
   e.preventDefault();
   const content = $appenderInput.value;
   const newItem = createItem(content);
+  postToServer(newItem.id, content);
   $appenderInput.value = '';
   $appenderInput.focus();
   $todoList.appendChild(newItem);
   registerEvent();
 };
 
-function createItem(content) {
+function createItem(content, id, checked) {
   const li = document.createElement('li');  
+  li.id = id ? id : Date.now();
   li.innerHTML = `
-  <input type="checkbox" class="check">
-  <p>${content}</p>
-  <button class="toggle">완료</button>
-  <button class="edit">수정</button>
-  <button class="remove">삭제</button>
+    <input type="checkbox" class="check">
+    <p>${content}</p>
+    <button class="toggle">완료</button>
+    <button class="edit">수정</button>
+    <button class="remove">삭제</button>
   `;
+  if (checked) {
+    selectOne(li, '.toggle').innerText = "취소";
+    selectOne(li, '.check').checked = true;  
+    selectOne(li, 'p').style.textDecoration = "line-through";
+    selectOne(li, 'p').style.color = "#09F";
+  }
   return li;
 };
 
@@ -46,7 +56,8 @@ function toggleItem(e) {
   const clickedType = e.target.getAttribute('type');
   const $parent = selectParent(e);
   const $content = selectOne($parent, 'p');
-  let isChecked = $parent.querySelector('.check').checked;
+  const $check = $parent.querySelector('.check');
+  let isChecked = $check.checked;
   let toggled;
   // toggled === true면 toggle 켜짐.
   if(clickedType) {
@@ -59,8 +70,9 @@ function toggleItem(e) {
     $content.style.textDecoration = toggled ? "line-through" : "";
     $content.style.color = toggled ? "#09F" : "";
     selectOne($parent, '.toggle').innerText = toggled ? "취소" : "완료";
-    selectOne($parent, '.check').checked = toggled ? true : false;
+    $check.checked = toggled ? true : false;
   }
+  putToServer($parent.id, $content.innerText, $check.checked);
 };
 
 function editItem(e) {
@@ -82,7 +94,6 @@ function editItem(e) {
   `;
   const $editForm = selectOne($parent, '#edit-form');
   const $editInput = selectOne($parent, 'input');
-  console.log($editInput);
 
   const completeEdit = e => {
     e.preventDefault();
@@ -90,6 +101,7 @@ function editItem(e) {
     $parent.innerHTML = originHTML;
     selectOne($parent, 'p').innerText = newContent;
     selectOne($parent, '.check').checked = isChecked;
+    putToServer($parent.id, newContent, isChecked);
     registerEvent();
   };
   
@@ -115,6 +127,55 @@ function editItem(e) {
 function removeItem(e) {
   $parent = selectParent(e);
   $parent.remove();
+  deleteServerItem($parent.id);
 };
 
+// Server
+function loadFromServer() {
+  fetch('api/todo').then(res => res.json()).then((data) => {
+    const items = data.item;
+    for (i=0; i < items.length; i++) {
+      const id = items[i].id;
+      const content = items[i].content;
+      const checked = items[i].checked;
+      $todoList.appendChild(createItem(content, id, checked));
+      registerEvent();
+    }
+  })
+};
 
+function postToServer(id, text) {
+  const reqBody = JSON.stringify({
+    id: id,
+    content: text,
+    checked: false
+  });
+  fetch('/api/todo', {
+    method: 'post',
+    body: reqBody,
+    headers: { 'content-type': 'application/json' }
+  })
+}
+
+function putToServer(id, text, checked) {
+  const reqBody = JSON.stringify({
+    id: id,
+    content: text,
+    checked: checked
+  });
+  fetch('/api/todo/edit', {
+    method: 'put',
+    body: reqBody,
+    headers: { 'content-type': 'application/json' }
+  })
+}
+
+function deleteServerItem(id) {
+  fetch('/api/todo/delete', {
+    method: 'delete',
+    body: JSON.stringify({
+      id: id
+    }),
+    headers: { 'content-type': 'application/json' }
+  })
+}
