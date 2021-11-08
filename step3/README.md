@@ -46,19 +46,19 @@
    - SOP(동일 출처 정책)으로 브라우저는 보안을 위해 다른 출처의 리소스 접근을 금지하는데, 외부의 리소스를 가져오기 위한 SOP의 예외가 CORS.
    - 브라우저가 외부 리소스를 요청할 때 추가적인 헤더에 요청에 대한 내용을 담아 서버에 전송하고, 서버는 접근이 허용된 출처를 헤더에 담아 브라우저에게 전송함.
    
-- [ ] 기능구현
-  - [ ] REST API 구현
-    - [ ] CRUD(Create, Read, Update, Delete)
-      - [ ] 아이템 조회
-      - [ ] 아이템 추가
-      - [ ] 아이템 내용 수정
-      - [ ] 아이템 토글
-      - [ ] 아이템 삭제
-    - [ ] 데이터를 저장할 수 있는 형태로 관리한다.
-      - [ ] 파일시스템(json) or MySQL or MongoDB 중 택 1
-  - [ ] 서버에서 HTML 불러오기
-    - [ ] static middleware를 이용
-  - [ ] fetch를 사용하여 API 연동하기
+- [x] 기능구현
+  - [x] REST API 구현
+    - [x] CRUD(Create, Read, Update, Delete)
+      - [x] 아이템 조회
+      - [x] 아이템 추가
+      - [x] 아이템 내용 수정
+      - [x] 아이템 토글
+      - [x] 아이템 삭제
+    - [x] 데이터를 저장할 수 있는 형태로 관리한다.
+      - [x] 파일시스템(json) or MySQL or MongoDB 중 택 1
+  - [x] 서버에서 HTML 불러오기
+    - [x] static middleware를 이용
+  - [x] fetch를 사용하여 API 연동하기
   
 ## 사전조사에 대한 참고링크
 
