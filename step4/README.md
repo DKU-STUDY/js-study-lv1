@@ -49,6 +49,7 @@
   - [x] 원하는 시스템 선택해서 배포해보기
   - 개인적으로 추천하는 것은 Heroku (무료)
 
+- 배포 : https://dkustudy-todolist.herokuapp.com/
 
 
  + 더 자세히 공부해야 할 부분
