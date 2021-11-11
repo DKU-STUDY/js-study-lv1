@@ -11,20 +11,45 @@ const $cancelBtns = $itemList.querySelectorAll('.cancel');
 const $completeBtns = $itemList.querySelectorAll('.complete');
 const $doneBtns = $itemList.querySelectorAll('.done');
 const $revokeBtn = $itemList.querySelector('.revoke');
+const $completeListBtn = document.querySelector('#completeList');
 
 /** 이벤트 리스너**/
 $appender.addEventListener('submit', send);
 $removeBtns.forEach($removeBtn => $removeBtn.addEventListener('click', remove));
-$editBtns.forEach($editBtn=> $editBtn.addEventListener('click', edit));
-$cancelBtns.forEach($cancelBtn=> $cancelBtn.addEventListener('click', cancel));
-$completeBtns.forEach($completeBtn=> $completeBtn.addEventListener('click', complete));
-$doneBtns.forEach($doneBtn=>$doneBtn.addEventListener('click', done));
-
+$editBtns.forEach($editBtn => $editBtn.addEventListener('click', edit));
+$cancelBtns.forEach($cancelBtn => $cancelBtn.addEventListener('click', cancel));
+$completeBtns.forEach($completeBtn => $completeBtn.addEventListener('click', complete));
+$doneBtns.forEach($doneBtn => $doneBtn.addEventListener('click', done));
+$completeListBtn.addEventListener('click', showCompleteList);
 
 /** 이벤트 함수 **/
 
+function showCompleteList(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'GET',
+        contentType: 'json',
+        url: '/completeList',
+        success: function(result){
+            resultArr = JSON.parse(result);
+            console.log(resultArr);
+            while($itemList.lastChild){
+                $itemList.lastChild.remove();
+            }
+            for(let i = 0; i<resultArr.length; i++){
+                let $p = document.createElement('p');
+                $p.innerText = `NO: ${resultArr[i]['NO']} | ${resultArr[i]['CONTENT']} | DATE: ${resultArr[i]['DATE']}`;
 
-function done(e){
+                $itemList.append($p)
+            }
+        },
+        error:function(request,status,error){
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+    });
+}
+
+function done(e) {
     e.preventDefault();
     $parent = e.target.parentNode.parentNode.parentNode;
     var txt = $parent.querySelector('input').value;
@@ -60,7 +85,7 @@ function complete(e) {
     $tsBtn.addEventListener('click', transfer);
 }
 
-function transfer(e){
+function transfer(e) {
     e.preventDefault();
     $parent = e.target.parentNode;
     $pNode = $parent.querySelector('p');
@@ -68,7 +93,35 @@ function transfer(e){
     console.log(pTxt);
 
     // ajax로 db 보내기..?
-    //$parent.remove();
+    $parent.remove();
+
+    let tsUrl = "/insert";
+    let data = {
+        pTxt: pTxt
+    };
+    let jData = JSON.stringify(data)
+    /*fetch(tsUrl, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json',
+            //'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: jData, // body data type must match "Content-Type" header
+    })
+        .then(response => console.log(response.json()));*/
+    console.log(jData)
+    $.ajax({
+        type: 'POST',
+        data: jData,
+        contentType: 'application/json; charset=utf-8',
+        url: '/insert',
+        success: function(result){
+            console.log(result);
+        },
+        error:function(request,status,error){
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+    });
 }
 
 function cancel(e) {
@@ -103,7 +156,7 @@ function edit(e) {
     $parent.querySelector('.done').addEventListener('click', done);
     $parent.querySelector('.revoke').addEventListener('click', revoke);
 
-    function revoke(e){
+    function revoke(e) {
         e.preventDefault();
         $parent.innerHTML = $originHTML;
 
