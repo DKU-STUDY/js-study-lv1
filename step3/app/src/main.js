@@ -12,6 +12,8 @@ const $completeBtns = $itemList.querySelectorAll('.complete');
 const $doneBtns = $itemList.querySelectorAll('.done');
 const $revokeBtn = $itemList.querySelector('.revoke');
 const $completeListBtn = document.querySelector('#completeList');
+const $todoList = document.querySelector('#todoList');
+const $trash = document.querySelector('#trash');
 
 /** 이벤트 리스너**/
 $appender.addEventListener('submit', send);
@@ -21,30 +23,48 @@ $cancelBtns.forEach($cancelBtn => $cancelBtn.addEventListener('click', cancel));
 $completeBtns.forEach($completeBtn => $completeBtn.addEventListener('click', complete));
 $doneBtns.forEach($doneBtn => $doneBtn.addEventListener('click', done));
 $completeListBtn.addEventListener('click', showCompleteList);
-
+$todoList.addEventListener('click', todoList);
+$trash.addEventListener('click', showTrashList);
 /** 이벤트 함수 **/
 
-function showCompleteList(e){
+function todoList(e) {
+    e.preventDefault();
+    window.location.href = 'http://localhost:3001/';
+}
+
+function showTrashList(e){
+    e.preventDefault();
+
+}
+
+function showCompleteList(e) {
     e.preventDefault();
     $.ajax({
         type: 'GET',
         contentType: 'json',
         url: '/completeList',
-        success: function(result){
+        success: function (result) {
             resultArr = JSON.parse(result);
             console.log(resultArr);
-            while($itemList.lastChild){
+            while ($itemList.lastChild) {
                 $itemList.lastChild.remove();
             }
-            for(let i = 0; i<resultArr.length; i++){
-                let $p = document.createElement('p');
-                $p.innerText = `NO: ${resultArr[i]['NO']} | ${resultArr[i]['CONTENT']} | DATE: ${resultArr[i]['DATE']}`;
+            for (let i = 0; i < resultArr.length; i++) {
 
-                $itemList.append($p)
+                let $li = `
+                    <li>
+                        <p style="color: #09F"><STRIKE>NO:${resultArr[i]['NO']} || ${resultArr[i]['CONTENT']} || DATE: ${resultArr[i]['DATE']}</STRIKE></p>
+                    </li>`;
+
+
+
+                //$p.innerText = `<li> NO: ${resultArr[i]['NO']} | ${resultArr[i]['CONTENT']} | DATE: ${resultArr[i]['DATE']}<li>`;
+
+                $itemList.innerHTML+=$li;
             }
         },
-        error:function(request,status,error){
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
     });
 }
@@ -95,11 +115,11 @@ function transfer(e) {
     // ajax로 db 보내기..?
     $parent.remove();
 
-    let tsUrl = "/insert";
-    let data = {
+    //let tsUrl = "/insert";
+    let dataTf = {
         pTxt: pTxt
     };
-    let jData = JSON.stringify(data)
+    let jDataTf = JSON.stringify(dataTf)
     /*fetch(tsUrl, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -109,17 +129,17 @@ function transfer(e) {
         body: jData, // body data type must match "Content-Type" header
     })
         .then(response => console.log(response.json()));*/
-    console.log(jData)
+    console.log(jDataTf)
     $.ajax({
         type: 'POST',
-        data: jData,
+        data: jDataTf,
         contentType: 'application/json; charset=utf-8',
         url: '/insert',
-        success: function(result){
+        success: function (result) {
             console.log(result);
         },
-        error:function(request,status,error){
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
     });
 }
@@ -169,7 +189,25 @@ function edit(e) {
 function remove(e) {
     console.log('delete Clicked');
     $parent = e.target.parentNode;
+    let trashP = $parent.querySelector('p').innerText;
+    let dataTs = {
+        trashP: trashP
+    };
+    let jDataTs = JSON.stringify(dataTs);
+    console.log($parent);
     $parent.remove();
+    $.ajax({
+        type: 'POST',
+        data: jDataTs,
+        contentType: 'application/json; charset=utf-8',
+        url: '/delete',
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    })
 }
 
 function send(e) {

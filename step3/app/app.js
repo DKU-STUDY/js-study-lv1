@@ -32,6 +32,18 @@ app.post('/insert', function (req, res) {
     db.db.query(insSql);
 });
 
+app.post('/delete', function (req, res) {
+    //db.connect();
+
+    console.log(req.body.trashP);
+    let rcvTsTxt = req.body.trashP;
+    let insTsDate = dateFormat(new Date());
+    let insTsSql = `INSERT INTO TODO_TRASH(CONTENT, DATE) values ('${rcvTsTxt}', '${insTsDate}')`;
+    console.log(insTsSql);
+
+    db.db.query(insTsSql);
+});
+
 app.get('/completeList', function(req,res){
     let selSql = `SELECT * FROM TODO`;
     db.db.query(selSql, function (err, results, fields){
