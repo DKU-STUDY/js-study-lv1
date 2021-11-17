@@ -14,6 +14,7 @@ const $revokeBtn = $itemList.querySelector('.revoke');
 const $completeListBtn = document.querySelector('#completeList');
 const $todoList = document.querySelector('#todoList');
 const $trash = document.querySelector('#trash');
+const $sendBtn = document.querySelector('#send');
 
 /** 이벤트 리스너**/
 $appender.addEventListener('submit', send);
@@ -25,6 +26,7 @@ $doneBtns.forEach($doneBtn => $doneBtn.addEventListener('click', done));
 $completeListBtn.addEventListener('click', showCompleteList);
 $todoList.addEventListener('click', todoList);
 $trash.addEventListener('click', showTrashList);
+
 /** 이벤트 함수 **/
 
 function todoList(e) {
@@ -34,7 +36,36 @@ function todoList(e) {
 
 function showTrashList(e){
     e.preventDefault();
+    $.ajax({
+        type: 'GET',
+        contentType: 'json',
+        url: '/trash',
+        success: function (result) {
+            resultArr = JSON.parse(result);
+            console.log(resultArr);
+            while ($itemList.lastChild) {
+                $itemList.lastChild.remove();
+            }
+            for (let i = 0; i < resultArr.length; i++) {
 
+                let $li = `
+                    <li>
+                        <p style="color: #000000"><STRIKE>NO:${resultArr[i]['NO']} || ${resultArr[i]['CONTENT']} || DATE: ${resultArr[i]['DATE']}</STRIKE></p>
+                    </li>`;
+
+
+
+                //$p.innerText = `<li> NO: ${resultArr[i]['NO']} | ${resultArr[i]['CONTENT']} | DATE: ${resultArr[i]['DATE']}<li>`;
+
+                $itemList.innerHTML+=$li;
+            }
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    });
+
+    $sendBtn.addEventListener('click', (e)=>e.preventDefault());
 }
 
 function showCompleteList(e) {
@@ -67,6 +98,7 @@ function showCompleteList(e) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
         }
     });
+    $sendBtn.addEventListener('click', (e)=>e.preventDefault());
 }
 
 function done(e) {

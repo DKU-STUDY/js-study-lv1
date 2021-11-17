@@ -53,6 +53,15 @@ app.get('/completeList', function(req,res){
     });
 });
 
+app.get('/trash', function(req,res){
+    let selSql = `SELECT * FROM TODO_TRASH`;
+    db.db.query(selSql, function (err, results, fields){
+        jResults = JSON.stringify(results);
+        console.log(jResults);
+        res.json(jResults);
+    });
+});
+
 
 function dateFormat(date) {
     let month = date.getMonth() + 1;
