@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Document</title>
+    <style>
+        body { font-family: malgun gothic, serif; }
+        * { margin: 0; padding: 0; }
+        ul, li { list-style: none }
+        input, button, textarea, select { vertical-align: middle; font-size: 13px; box-sizing: border-box; cursor: pointer }
+        button[type="submit"] { background: #09F; }
+        input { border: 1px solid #bebebe; height: 30px; border-radius: 3px; padding: 0 10px; }
+        button { background: #aaa; color: #FFF; border: none; height: 30px; width: 60px; border-radius: 3px; }
+        main { width: 1000px; margin: 0 auto }
+        fieldset { border: none; }
+
+        #app > h1 { text-align: center; padding: 20px 0;}
+        #app > form { border: 1px solid #ddd; padding: 30px; }
+        #app > ul { border: 1px solid #ddd; padding: 30px; margin-top: 20px; background: #fefefe;}
+        #app > ul li { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #ddd; }
+        #app > ul li button { margin-left: 5px; }
+    </style>
+</head>
+<body>
+<main id="app">
+    <h1>📃 TodoList</h1>
+    <form name="appenderForm" action="" method="post">
+        <fieldset>
+            <legend hidden>TodoList Form</legend>
+            <label>
+                <span hidden>아이템 추가</span>
+                <input type="text" size="40" placeholder="Todo Item 내용을 입력해주세요">
+            </label>
+            <button id="send" type="submit">전송</button>
+            <button id="completeList" type="submit">처리 목록</button>
+            <button id="trash" type="submit">쓰레기통</button>
+            <button id="todoList" type="submit">TodoList</button>
+        </fieldset>
+    </form>
+    <ul id = "itemList">
+        <!-- 완료된 아이템 -->
+        <li>
+            <p style="color: #09F">
+                1주차: Todo List 만들기
+            </p>
+            <button class="cancel" type="button">취소</button>
+            <button class="edit" type="button">수정</button>
+            <button class="remove" type="button">삭제</button>
+        </li>
+        <!-- / 완료된 아이템 -->
+
+        <!-- 수정 중인 아이템 -->
+        <li>
+            <form name="modifierForm" action="">
+                <fieldset>
+                    <legend hidden>아이템 수정</legend>
+                    <label>
+                        <span hidden>아이템 수정</span>
+                        <input type="text" value="2주차: 번들러 조사 및 적용" size="40">
+                    </label>
+                    <button class="done" type="submit">완료</button>
+                    <button class="revoke" type="button">취소</button>
+                </fieldset>
+            </form>
+        </li>
+        <!-- / 수정 중인 아이템 -->
+
+        <!-- 아이템의 기본 상태들 -->
+        <li>
+            <p>
+                3주차: node.js + express.js + REST API + ajax
+            </p>
+            <button class="complete" type="button">완료</button>
+            <button class="edit" type="button">수정</button>
+            <button class="remove" type="button">삭제</button>
+        </li>
+        <li>
+            <p>
+                4주차: 배포하기
+            </p>
+            <button class="complete" type="button">완료</button>
+            <button class="edit" type="button">수정</button>
+            <button class="remove" type="button">삭제</button>
+        </li>
+        <!-- / 아이템의 기본 상태들 -->
+    </ul>
+</main>
+<!--<script src="/main.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>
