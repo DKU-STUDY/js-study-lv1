@@ -14,7 +14,7 @@
 - [3주차: node.js + express.js + REST API + ajax](./step3)
 - [4주차: 배포하기](./step4)
 
-## 들어가기 전에
+## 들어가기 전에 안녕하세요 저는 황준일입니다.
 
 ### Editor 혹은 IDE
 
